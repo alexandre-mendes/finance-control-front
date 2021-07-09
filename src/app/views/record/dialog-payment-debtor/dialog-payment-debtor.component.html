@@ -4,16 +4,16 @@
     <h4>Titulo do Débito: {{recordDebtor.title}}</h4>
     <h4>Valor: {{recordDebtor.value | currency: 'BRL'}}</h4>
     <mat-form-field appearance="fill">
-        <mat-label>Tipo Carteira</mat-label>
+        <mat-label>Selecione uma Carteira</mat-label>
         <mat-select [(value)]="uuidWallet" matInput required>
-          <mat-option [value]="option.uuid" *ngFor="let option of wallets">{{ option.title }}</mat-option>
+          <mat-option (click)="selectedWallet()" [value]="option.uuid" *ngFor="let option of wallets">{{ option.title }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>Selecione um Crédito</mat-label>
-        <mat-select [(value)]="uuidWallet" matInput required>
-          <mat-option [value]="option.uuid" *ngFor="let option of wallets">{{ option.title }}</mat-option>
+        <mat-select [(value)]="recordCreditor" matInput required>
+          <mat-option [value]="option" *ngFor="let option of records">{{ option.title }}</mat-option>
         </mat-select>
     </mat-form-field>
 

@@ -18,6 +18,7 @@ export class DialogPaymentDebtorComponent implements OnInit {
   wallets: Wallet[] = [];
   records: RecordCreditor[] = [];
   recordDebtor: RecordDebtor = {};
+  recordCreditor: RecordCreditor = {};
   uuidWallet: string = "";
   monthCurrent: number = 0;
 
@@ -41,11 +42,19 @@ export class DialogPaymentDebtorComponent implements OnInit {
 
   selectedWallet() {
     this.recordService.listAllCreditor(this.uuidWallet, this.monthCurrent).subscribe(response => {
-      this.records = response.content;
+      this.records = response.content.filter(
+        record => record.value != undefined 
+        && this.recordDebtor.value != undefined 
+        && record.value >= this.recordDebtor.value);
     });
   }
 
   confirm() {
-
+    if (this.recordDebtor.uuid != undefined && this.recordCreditor.uuid != undefined) {
+      this.recordService.pay(this.recordDebtor.uuid, this.recordCreditor.uuid).subscribe(() => {
+        this.messageService.showMessage("Pagamento efetuado com sucesso.")
+        this.dialogRef.close();
+      })
+    } 
   }
 }
