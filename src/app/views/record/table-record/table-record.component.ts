@@ -1,8 +1,10 @@
+import { Wallet } from './../../wallet/wallet.model';
 import { RecordDebtor } from './../record-debtor.model';
 import { DialogPaymentDebtorComponent } from './../dialog-payment-debtor/dialog-payment-debtor.component';
 import { RecordService } from './../record.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { WalletService } from '../../wallet/wallet.service';
 
 
 @Component({
@@ -17,10 +19,14 @@ export class TableRecordComponent implements OnInit {
 
   displayedColumns: string[] = ['deadline', 'title', 'valor', 'paid', 'actions'];
 
-  constructor(private recordService: RecordService,
+  wallet: Wallet = {};
+
+  constructor(private walletService: WalletService,
+    private recordService: RecordService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.wallet = this.walletService.wallet;
   }
 
   pay(recordDebtor: RecordDebtor) {
@@ -28,4 +34,10 @@ export class TableRecordComponent implements OnInit {
     this.dialog.open(DialogPaymentDebtorComponent);
   }
 
+  isCreditor(): boolean {
+    if(this.wallet.typeWallet === 'CREDITOR') {
+      return true;
+    }
+    return false;
+  }
 }

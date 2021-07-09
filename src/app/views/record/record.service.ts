@@ -62,6 +62,13 @@ export class RecordService {
     );
   }
 
+  pay(uuidDebtor: string, uuidCreditor: string): Observable<void> {
+    return this.http.post<void>(`${environment.api}/payment`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
+      map(obj => obj),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
   findCurrentMonth(): Observable<number> {
     return this.http.get<number>(`${environment.api}/month/current`).pipe(
       map(obj => obj),

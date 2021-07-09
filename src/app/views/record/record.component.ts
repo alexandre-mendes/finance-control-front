@@ -33,7 +33,7 @@ export class RecordComponent implements OnInit {
 
   async initialize() {
     this.wallet = this.walletService.wallet;
-
+    console.log("INITIALIZE ", this.wallet)
     this.recordService.findCurrentMonth().subscribe(mesAtual => {
       this.tabMesSeelecionada = mesAtual - 1;
 
@@ -42,7 +42,6 @@ export class RecordComponent implements OnInit {
   }
 
   listAll() {
-    console.log(this.wallet)
     if(this.wallet.typeWallet === "DEBTOR") {
       this.listAllDebtor();
     } else {
