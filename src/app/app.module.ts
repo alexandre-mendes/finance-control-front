@@ -40,8 +40,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DialogRecordCreditorComponent } from './views/record/dialog-record-creditor/dialog-record-creditor.component';
 import { DialogRecordDebtorComponent } from './views/record/dialog-record-debtor/dialog-record-debtor.component';
 import { DialogPaymentDebtorComponent } from './views/record/dialog-payment-debtor/dialog-payment-debtor.component';
-import { TaleRecordCreditorComponent } from './views/record/tale-record-creditor/tale-record-creditor.component';
-import { TaleRecordDebtorComponent } from './views/record/tale-record-debtor/tale-record-debtor.component';
 
 
 @NgModule({
@@ -61,8 +59,6 @@ import { TaleRecordDebtorComponent } from './views/record/tale-record-debtor/tal
     DialogRecordCreditorComponent,
     DialogRecordDebtorComponent,
     DialogPaymentDebtorComponent,
-    TaleRecordCreditorComponent,
-    TaleRecordDebtorComponent,
   ],
   imports: [
     FormsModule,
