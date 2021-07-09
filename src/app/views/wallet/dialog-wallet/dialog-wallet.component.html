@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Adicionar Carteira</h2>
+<mat-dialog-content class="mat-typography">    
+  <form  #form="ngForm">
+    <mat-form-field>
+        <input matInput placeholder="Titulo" [(ngModel)]="wallet.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo Carteira</mat-label>
+      <mat-select [(value)]="wallet.typeWallet" matInput required>
+        <mat-option [value]="option.value" *ngFor="let option of types">{{ option.viewValue }}</mat-option>
+    </mat-select>
+</mat-form-field>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="basic" mat-button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button color="primary" mat-button mat-raised-button (click)="save()">Salvar</button>
+</mat-dialog-actions>

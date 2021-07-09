@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Adicionar Registro</h2>
+<mat-dialog-content class="mat-typography">    
+  <form  #form="ngForm">
+    <mat-form-field>
+        <input matInput placeholder="Titulo" [(ngModel)]="record.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Valor" [(ngModel)]="record.value" name="value" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Data de Recebimento</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="record.dateReceivement" name="dateReceivement">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="basic" mat-button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button color="primary" mat-button mat-raised-button (click)="save()">Salvar</button>
+</mat-dialog-actions>

@@ -1,0 +1,57 @@
+<mat-card>
+  <button color="primary" mat-raised-button (click)="openDialog()">Novo Registro</button>
+</mat-card>
+<br>
+<mat-card>
+  <div class="flex">
+    <div>
+      <mat-card-title>{{wallet.title}}</mat-card-title>
+      <br>
+      <mat-card-subtitle>{{wallet.typeWallet === 'CREDITOR' ? 'Ativo' : 'Passivo'}}</mat-card-subtitle>
+    </div>
+    <div style="float: right;">
+      <button mat-button color="accent">Pagar Tudo</button>
+    </div>
+  </div>
+</mat-card>
+
+<mat-tab-group [(selectedIndex)]="tabMesSeelecionada" (selectedTabChange)="loadRecordMonth($event)">
+  <mat-tab label="Janeiro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Fevereiro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Março">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Abril">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Maio">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Junho">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Julho">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Agosto">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Setembro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Outubro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Novembro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+  <mat-tab label="Dezembro">
+    <app-table-record [dataSource]="records"></app-table-record>
+  </mat-tab>
+</mat-tab-group>
+
+
