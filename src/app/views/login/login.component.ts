@@ -1,3 +1,4 @@
+import { MessageService } from './../../shared/message.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/shared/account.service';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private accountService: AccountService, 
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -25,10 +27,9 @@ export class LoginComponent implements OnInit {
     try {
       window.localStorage.removeItem('token');
       const result = await this.accountService.login(this.login);
-      console.log(`Login efetuado ${result}`);
       this.router.navigate(['wallet']);
     } catch (error) {
-      console.error(error);
+      this.messageService.showMessage("Usuário ou senha inválido.", true);
     }
   }
 
