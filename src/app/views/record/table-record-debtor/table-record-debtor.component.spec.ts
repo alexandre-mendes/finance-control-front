@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableRecordComponent } from './table-record.component';
+import { TableRecordDebtorComponent } from './table-record-debtor.component';
 
-describe('TableRecordComponent', () => {
-  let component: TableRecordComponent;
-  let fixture: ComponentFixture<TableRecordComponent>;
+describe('TableRecordDebtorComponent', () => {
+  let component: TableRecordDebtorComponent;
+  let fixture: ComponentFixture<TableRecordDebtorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableRecordComponent ]
+      declarations: [ TableRecordDebtorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableRecordComponent);
+    fixture = TestBed.createComponent(TableRecordDebtorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

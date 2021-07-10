@@ -6,13 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletService } from '../../wallet/wallet.service';
 
-
 @Component({
-  selector: 'app-table-record',
-  templateUrl: './table-record.component.html',
-  styleUrls: ['./table-record.component.css']
+  selector: 'app-table-record-debtor',
+  templateUrl: './table-record-debtor.component.html',
+  styleUrls: ['./table-record-debtor.component.css']
 })
-export class TableRecordComponent implements OnInit {
+export class TableRecordDebtorComponent implements OnInit {
 
   @Input()
   dataSource: {}[] = [];
@@ -32,12 +31,5 @@ export class TableRecordComponent implements OnInit {
   pay(recordDebtor: RecordDebtor) {
     this.recordService.recordPayment = recordDebtor;
     this.dialog.open(DialogPaymentDebtorComponent);
-  }
-
-  isCreditor(): boolean {
-    if(this.wallet.typeWallet === 'CREDITOR') {
-      return true;
-    }
-    return false;
   }
 }
