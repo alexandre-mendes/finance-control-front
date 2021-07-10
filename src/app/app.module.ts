@@ -4,15 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './views/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { CreateAccountComponent } from './views/create-account/create-account.component';
@@ -27,19 +27,22 @@ import { NavComponent } from './views/generic-home/nav/nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { WalletComponent } from './views/wallet/wallet.component';
 import { DialogWalletComponent } from './views/wallet/dialog-wallet/dialog-wallet.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RecordComponent } from './views/record/record.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatTabsModule} from '@angular/material/tabs';
-import { TableRecordComponent } from './views/record/table-record/table-record.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DialogRecordCreditorComponent } from './views/record/dialog-record-creditor/dialog-record-creditor.component';
 import { DialogRecordDebtorComponent } from './views/record/dialog-record-debtor/dialog-record-debtor.component';
 import { DialogPaymentDebtorComponent } from './views/record/dialog-payment-debtor/dialog-payment-debtor.component';
+import { DialogTransferCreditorComponent } from './views/record/dialog-transfer-creditor/dialog-transfer-creditor.component';
+import { TableRecordDebtorComponent } from './views/record/table-record-debtor/table-record-debtor.component';
+import { TableRecordCreditorComponent } from './views/record/table-record-creditor/table-record-creditor.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -55,10 +58,12 @@ import { DialogPaymentDebtorComponent } from './views/record/dialog-payment-debt
     WalletComponent,
     DialogWalletComponent,
     RecordComponent,
-    TableRecordComponent,
     DialogRecordCreditorComponent,
     DialogRecordDebtorComponent,
     DialogPaymentDebtorComponent,
+    DialogTransferCreditorComponent,
+    TableRecordDebtorComponent,
+    TableRecordCreditorComponent,
   ],
   imports: [
     FormsModule,
@@ -85,10 +90,12 @@ import { DialogPaymentDebtorComponent } from './views/record/dialog-payment-debt
     MatTabsModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-GB'},
   ],
   bootstrap: [AppComponent]
 })

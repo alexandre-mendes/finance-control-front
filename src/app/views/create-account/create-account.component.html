@@ -1,1 +1,50 @@
-<p>create-account works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<mat-card class="mycard" *ngIf="!accountCreated">
+    <div style="display: flex;">
+        <button mat-mini-fab color="primary" (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>
+            <br>
+            <h1>Finance Control</h1>
+        </div>
+    </div>
+    <br>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+        <mat-form-field>
+            <input type="email" matInput placeholder="Nome" [(ngModel)]="login.name" name="name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="email" matInput placeholder="Email" [(ngModel)]="login.username" name="login" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="password" matInput placeholder="Senha" [(ngModel)]="login.password1" name="password1" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="password" matInput placeholder="Repita a senha" [(ngModel)]="login.password2" name="password2" required>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit">
+            Criar
+        </button>
+    </form>
+</mat-card>
+
+<mat-card class="mycard" *ngIf="accountCreated">
+    <mat-card-title>Finance Control</mat-card-title>
+    <h3>Digite o codigo de ativação enviado para seu email.</h3>
+    <br>
+    <form (ngSubmit)="activation()" #form="ngForm">
+        <mat-form-field>
+            <input matInput placeholder="Código" [(ngModel)]="activationCode" name="activationCode" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+            Ativar
+        </button>
+    </form>
+</mat-card>

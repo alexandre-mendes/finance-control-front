@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
     "password": ""
   }
 
+  loading: boolean = false;
+
   constructor(
     private accountService: AccountService, 
     private router: Router,
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
       const result = await this.accountService.login(this.login);
       this.router.navigate(['wallet']);
     } catch (error) {
+      this.loading = false;
       this.messageService.showMessage("Usuário ou senha inválido.", true);
     }
   }

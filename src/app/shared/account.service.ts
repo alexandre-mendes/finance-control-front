@@ -1,27 +1,56 @@
+import { MessageService } from './message.service';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import jwt_decode, { JwtPayload } from 'jwt-decode'
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  constructor(private http: HttpClient) { }
+  loadingEvent = new EventEmitter<boolean>();
+
+  constructor(private http: HttpClient,
+    private messageService: MessageService) { }
 
   async login(user: any) {
-    
+    this.loadingEvent.emit(true);
     const result = await this.http.post<any>(`${environment.api}/login`, JSON.stringify(user)).toPromise();
     let token = JSON.parse(JSON.stringify(result)).Authorization.split(" ")[1];
 
     window.localStorage.setItem('token', token);
+    this.loadingEvent.emit(false);
       return true;
   }
 
-  async createUser(user: any) {
-    const result = await this.http.post<any>(`${environment.api}/user`, JSON.stringify(user)).toPromise();
-    return result;
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(`${environment.api}/user`, user).pipe(
+      map(obj => {
+        this.loadingEvent.emit(true);
+        return obj
+      }),
+      catchError((e) => {
+        this.loadingEvent.emit(false);
+        return this.messageService.errorHandler(e)
+      })
+    );
+  }
+
+  userActivation(user: User): Observable<void> {
+    return this.http.post<void>(`${environment.api}/user/activation`, user).pipe(
+      map(obj => {
+        this.loadingEvent.emit(true);
+        return obj;
+      }),
+      catchError(e => {
+        this.loadingEvent.emit(false);
+        return this.messageService.errorHandler(e)
+      })
+    );
   }
 
   getAuthorizationToken() {
