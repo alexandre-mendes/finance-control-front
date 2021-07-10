@@ -45,7 +45,8 @@ export class DialogPaymentDebtorComponent implements OnInit {
       this.records = response.content.filter(
         record => record.value != undefined 
         && this.recordDebtor.value != undefined 
-        && record.value >= this.recordDebtor.value);
+        && record.value >= this.recordDebtor.value
+        && record.received);
     });
   }
 

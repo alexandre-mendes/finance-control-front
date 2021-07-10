@@ -26,7 +26,7 @@ export class RecordComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialize();
-    this.recordService.issueRecordCreated.subscribe(() => {
+    this.recordService.updateRecords.subscribe(() => {
       this.listAll();
     })
   }

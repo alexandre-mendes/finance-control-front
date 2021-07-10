@@ -24,7 +24,6 @@ export class DialogRecordCreditorComponent implements OnInit {
   }
 
   save() {
-    console.log(this.record)
     this.recordService.create(this.record).subscribe(() => {
       this.messageService.showMessage("Registro salvo com sucesso.")
       this.dialogRef.close();

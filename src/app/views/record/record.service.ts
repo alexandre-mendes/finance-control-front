@@ -14,9 +14,10 @@ import { Page } from 'src/app/shared/page.model';
 })
 export class RecordService {
 
-  issueRecordCreated = new EventEmitter<string>();
+  updateRecords = new EventEmitter<string>();
   wallet: Wallet = {};
   recordPayment: RecordDebtor = {};
+  recordTransfer: RecordCreditor = {};
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -32,7 +33,7 @@ export class RecordService {
     record.walletUuid = this.wallet.uuid;
     return this.http.post<RecordDebtor>(`${environment.api}/record-debtor`, record).pipe(
       map(obj => 
-        { this.issueRecordCreated.emit(obj.title); 
+        { this.updateRecords.emit(obj.title); 
           return obj;                             }),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -42,7 +43,7 @@ export class RecordService {
     record.walletUuid = this.wallet.uuid;
     return this.http.post<RecordCreditor>(`${environment.api}/record-creditor`, record).pipe(
       map(obj => 
-        { this.issueRecordCreated.emit(obj.title); 
+        { this.updateRecords.emit(obj.title); 
           return obj;                             }),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -63,8 +64,20 @@ export class RecordService {
   }
 
   pay(uuidDebtor: string, uuidCreditor: string): Observable<void> {
-    return this.http.post<void>(`${environment.api}/payment`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
-      map(obj => obj),
+    return this.http.post<void>(`${environment.api}/transaction/pay`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
+      map(obj => 
+        { this.updateRecords.emit("");
+          return obj;                       }),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  transfer(uuidOrigin: string, uuidDestiny: string, valueTransfer: number): Observable<void> {
+    return this.http.post<void>(`${environment.api}/transaction/transfer`, 
+    {uuidOrigin: uuidOrigin, uuidDestiny: uuidDestiny, valueTransfer: valueTransfer}).pipe(
+      map(obj => 
+        { this.updateRecords.emit("");
+          return obj;                       }),
       catchError(e => this.messageService.errorHandler(e))
     )
   }

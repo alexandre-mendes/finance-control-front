@@ -4,4 +4,5 @@ export interface RecordCreditor {
     dateReceivement?: string;
     value?: number;
     uuid?: string;
+    received?: boolean;
 }
