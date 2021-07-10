@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Realizar Transferência</h2>
+<mat-dialog-content class="mat-typography">    
+  <form  #form="ngForm">
+    <h4>Titulo do Crédito: {{recordCreditorOrigem.title}}</h4>
+    <h4>Valor Disponível: {{recordCreditorOrigem.value | currency: 'BRL'}}</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Carteira Destino</mat-label>
+        <mat-select [(value)]="uuidWallet" matInput required>
+          <mat-option (click)="selectedWallet()" [value]="option.uuid" *ngFor="let option of wallets">{{ option.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Crédito Destino</mat-label>
+        <mat-select [(value)]="recordCreditorDestino" matInput required>
+          <mat-option [value]="option" *ngFor="let option of records">{{ option.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Valor" [(ngModel)]="valueTransfer" name="value" required>
+    </mat-form-field>
+
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="basic" mat-button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button color="primary" mat-button mat-raised-button (click)="confirm()">Confirmar</button>
+</mat-dialog-actions>
