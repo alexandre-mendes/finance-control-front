@@ -2,7 +2,7 @@ export interface RecordDebtor {
     uuid?: string;
     registrationCode?: string;
     title?: string;
-    deadline?: Date;
+    dateDeadline?: Date;
     paid?: boolean;
     value?: number;
     installments?: number;

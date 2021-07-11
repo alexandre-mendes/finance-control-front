@@ -11,6 +11,7 @@ interface Type {
 interface Wallet {
   title: string;
   typeWallet: string;
+  dateWallet: Date;
 }
 
 @Component({
@@ -27,7 +28,8 @@ export class DialogWalletComponent implements OnInit {
 
   wallet: Wallet = {
     title: "",
-    typeWallet: ""
+    typeWallet: "",
+    dateWallet: new Date
   }
 
   constructor(private walletService: WalletService, 

@@ -1,3 +1,4 @@
+import { WalletService } from './../../wallet/wallet.service';
 import { Wallet } from './../../wallet/wallet.model';
 import { RecordCreditor } from './../record-creditor.model';
 import { Component, OnInit } from '@angular/core';
@@ -18,9 +19,11 @@ export class DialogRecordCreditorComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private recordService: RecordService,
     private messageService: MessageService,
-    private dialogRef: MatDialogRef<DialogRecordCreditorComponent>) { }
+    private dialogRef: MatDialogRef<DialogRecordCreditorComponent>,
+    private walletService: WalletService) { }
 
   ngOnInit(): void {
+    this.record.dateReceivement = this.walletService.wallet.dateWallet;
   }
 
   save() {

@@ -43,6 +43,11 @@ import { DialogTransferCreditorComponent } from './views/record/dialog-transfer-
 import { TableRecordDebtorComponent } from './views/record/table-record-debtor/table-record-debtor.component';
 import { TableRecordCreditorComponent } from './views/record/table-record-creditor/table-record-creditor.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 
 @NgModule({
@@ -91,7 +96,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [
     httpInterceptorProviders,

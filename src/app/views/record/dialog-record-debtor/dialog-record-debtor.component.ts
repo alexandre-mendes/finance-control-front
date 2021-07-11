@@ -1,3 +1,4 @@
+import { WalletService } from './../../wallet/wallet.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -17,9 +18,11 @@ export class DialogRecordDebtorComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private recordService: RecordService,
     private messageService: MessageService,
-    private dialogRef: MatDialogRef<DialogRecordDebtorComponent>) { }
+    private dialogRef: MatDialogRef<DialogRecordDebtorComponent>,
+    private walletService: WalletService) { }
 
   ngOnInit(): void {
+    this.record.dateDeadline = this.walletService.wallet.dateWallet;
   }
 
   save() {

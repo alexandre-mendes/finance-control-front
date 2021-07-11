@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Valor" [(ngModel)]="record.value" name="value" required>
+        <input type='text' mask="separator.2" thousandSeparator="." matInput placeholder="Valor" [(ngModel)]="record.value" name="value" required>
     </mat-form-field>
 
     <mat-form-field>
@@ -15,7 +15,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Vencimento</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="record.deadline" name="deadline">
+        <input [disabled]="record.dateDeadline != undefined" matInput [matDatepicker]="picker" [(ngModel)]="record.dateDeadline" name="dateDeadline">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
