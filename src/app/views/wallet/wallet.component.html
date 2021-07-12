@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col">
       <mat-card>
-        <mat-card-title style="color: #69f0ae">Total: {{walletSummary.totalCreditor | currency : 'BRL'}}</mat-card-title>
+        <mat-card-title style="color: #2e7d32;">Total: {{walletSummary.totalCreditor | currency : 'BRL'}}</mat-card-title>
         <br>
         <mat-card-subtitle>% Comprometido: {{walletSummary.percentageCommitted | percent: '1.2-2'}}</mat-card-subtitle>
       </mat-card>
@@ -73,7 +73,7 @@
             </button>
           </mat-menu>
           <mat-card-header>
-            <div mat-card-avatar >
+            <div mat-card-avatar>
               <button mat-mini-fab color="warn" (click)="redirectRecord(wallet)">
                 <mat-icon>visibility</mat-icon>
               </button>
