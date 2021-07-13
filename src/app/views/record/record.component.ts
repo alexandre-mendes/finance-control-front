@@ -36,6 +36,7 @@ export class RecordComponent implements OnInit {
     console.log("INITIALIZE ", this.wallet)
     this.recordService.findCurrentMonth().subscribe(mesAtual => {
       this.tabMesSeelecionada = mesAtual - 1;
+      this.recordService.monthSelected = mesAtual;
 
       this.listAll();
     })
@@ -64,6 +65,7 @@ export class RecordComponent implements OnInit {
   loadRecordMonth(event: MatTabChangeEvent) {
     this.records = [];
     this.listAll();
+    this.recordService.monthSelected = this.tabMesSeelecionada;
   }
 
   openDialog() {

@@ -14,6 +14,7 @@ import { RecordService } from '../record.service';
 export class DialogRecordDebtorComponent implements OnInit {
 
   record: RecordDebtor = {};
+  dayWallet?: number = undefined;
 
   constructor(private route: ActivatedRoute,
     private recordService: RecordService,
@@ -22,7 +23,12 @@ export class DialogRecordDebtorComponent implements OnInit {
     private walletService: WalletService) { }
 
   ngOnInit(): void {
-    this.record.dateDeadline = this.walletService.wallet.dateWallet;
+    let date = new Date();
+    date.setDate(this.walletService.wallet.dayWallet || 1)
+    date.setMonth(this.recordService.monthSelected)
+    this.record.dateDeadline = date;
+
+    this.dayWallet = this.walletService.wallet.dayWallet;
   }
 
   save() {

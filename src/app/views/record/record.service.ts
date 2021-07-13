@@ -18,6 +18,7 @@ export class RecordService {
   wallet: Wallet = {};
   recordPayment: RecordDebtor = {};
   recordTransfer: RecordCreditor = {};
+  monthSelected: number = 1;
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 

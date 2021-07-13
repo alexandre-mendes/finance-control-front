@@ -16,6 +16,8 @@ export class DialogRecordCreditorComponent implements OnInit {
 
   record: RecordCreditor = {};
 
+  dayWallet?: number = undefined;
+
   constructor(private route: ActivatedRoute,
     private recordService: RecordService,
     private messageService: MessageService,
@@ -23,7 +25,12 @@ export class DialogRecordCreditorComponent implements OnInit {
     private walletService: WalletService) { }
 
   ngOnInit(): void {
-    this.record.dateReceivement = this.walletService.wallet.dateWallet;
+    let date = new Date();
+    date.setDate(this.walletService.wallet.dayWallet || 1)
+    date.setMonth(this.recordService.monthSelected)
+    this.record.dateReceivement = date;
+
+    this.dayWallet = this.walletService.wallet.dayWallet;
   }
 
   save() {

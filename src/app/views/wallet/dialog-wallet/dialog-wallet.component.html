@@ -13,10 +13,10 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Vencimento</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="wallet.dateWallet" name="dateWallet">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-label>Dia da Carteira</mat-label>
+      <mat-select [(value)]="wallet.dayWallet" matInput required>
+        <mat-option [value]="option" *ngFor="let option of dias">{{ option }}</mat-option>
+      </mat-select>
     </mat-form-field>
 </form>
 </mat-dialog-content>

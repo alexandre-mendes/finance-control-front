@@ -2,16 +2,11 @@ import { MessageService } from './../../../shared/message.service';
 import { WalletService } from './../wallet.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Wallet } from '../wallet.model';
 
 interface Type {
   value: string;
   viewValue: string;
-}
-
-interface Wallet {
-  title: string;
-  typeWallet: string;
-  dateWallet: Date;
 }
 
 @Component({
@@ -26,11 +21,9 @@ export class DialogWalletComponent implements OnInit {
     {value: 'DEBTOR', viewValue: 'Devedora'}
   ];
 
-  wallet: Wallet = {
-    title: "",
-    typeWallet: "",
-    dateWallet: new Date
-  }
+  dias: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+
+  wallet: Wallet = {}
 
   constructor(private walletService: WalletService, 
     private messageService: MessageService,
