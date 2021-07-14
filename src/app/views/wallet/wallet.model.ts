@@ -3,4 +3,5 @@ export interface Wallet {
     title?: string
     typeWallet?: string
     dayWallet?: number;
+    total?: number;
 }
