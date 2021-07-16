@@ -41,7 +41,7 @@
           <mat-card-content>
           </mat-card-content>
           <mat-card-actions>
-              <mat-card-subtitle>Total: {{(wallet.total == undefined ? 0  : wallet.total) | currency: 'BRL'}}</mat-card-subtitle>
+              <mat-card-subtitle>Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}}</mat-card-subtitle>
           </mat-card-actions>
         </mat-card>
         <br>
@@ -84,7 +84,10 @@
           <mat-card-content>
           </mat-card-content>
           <mat-card-actions>
-            <mat-card-subtitle>Total: {{(wallet.total == undefined ? 0  : wallet.total) | currency: 'BRL'}}</mat-card-subtitle>
+            <mat-card-subtitle>
+              Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}} |
+              Total Pago: {{(wallet.valuePaid == undefined ? 0  : wallet.valuePaid) | currency: 'BRL'}}
+            </mat-card-subtitle>
           </mat-card-actions>
         </mat-card>
         <br>
