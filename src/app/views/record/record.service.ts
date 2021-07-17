@@ -84,7 +84,7 @@ export class RecordService {
   }
 
   findCurrentMonth(): Observable<number> {
-    return this.http.get<number>(`${environment.api}/month/current`).pipe(
+    return this.http.get<number>(`${environment.api}/date/month/current`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     )

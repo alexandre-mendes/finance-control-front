@@ -27,8 +27,8 @@ export class WalletService {
     );
   }
 
-  listAll(): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallet`).pipe(
+  listAll(month: number): Observable<Page<Wallet>> {
+    return this.http.get<Wallet[]>(`${environment.api}/wallet/${month}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -41,8 +41,15 @@ export class WalletService {
     );
   }
 
-  findWalletsSummary(): Observable<WalletSummary> {
-    return this.http.get<WalletSummary>(`${environment.api}/wallet/summary`).pipe(
+  findWalletsSummary(month: number): Observable<WalletSummary> {
+    return this.http.get<WalletSummary>(`${environment.api}/wallet/summary/${month}`).pipe(
+      map(obj => obj),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  findCurrentMonth(): Observable<number> {
+    return this.http.get<number>(`${environment.api}/date/month/current`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     )

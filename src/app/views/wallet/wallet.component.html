@@ -1,5 +1,18 @@
 <mat-card>
   <button color="primary" mat-raised-button (click)="openDialog()">Nova Carteira</button>
+  <!-- <mat-form-field appearance="fill" style="float: right;">
+    <mat-label>Ano</mat-label>
+    <mat-select [(value)]="monthSelected" matInput required>
+      <mat-option [value]="month" *ngFor="let month of months">{{ month.label }}</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill" style="float: right;">
+    <mat-label>Mês</mat-label>
+    <mat-select [(value)]="monthSelected" matInput required>
+      <mat-option [value]="month" *ngFor="let month of months" (click)="reloadWallets()">{{ month.label }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </mat-card>
 <br>
 
