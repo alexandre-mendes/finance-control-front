@@ -31,10 +31,10 @@ export class DialogPaymentDebtorComponent implements OnInit {
   ngOnInit(): void {
     this.recordService.findCurrentMonth().subscribe(monthCurrent => {
       this.monthCurrent = monthCurrent;
-    });
-
-    this.walletService.listAllCreditor().subscribe(response => {
-      this.wallets = response.content;
+      
+      this.walletService.listAllCreditor(monthCurrent).subscribe(response => {
+        this.wallets = response.content;
+      });
     });
 
     this.recordDebtor = this.recordService.recordPayment;

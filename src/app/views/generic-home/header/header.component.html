@@ -1,11 +1,18 @@
 <p class="mat-elevation-z6">
     <mat-toolbar color="primary">
       <button (click)="home()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>home</mat-icon>
-        <span>Finance Control</span>
+        <h1><mat-icon>savings</mat-icon> Finance Control</h1>
       </button>
-      
       <span class="example-spacer"></span>
-      <button mat-raised-button (click)="logout()">Sair</button>
+
+      <button mat-raised-button style="margin-right: 2px;">
+        <mat-icon>settings</mat-icon>
+        Configurações
+      </button>
+
+      <button mat-raised-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Sair
+      </button>
     </mat-toolbar>
 </p>

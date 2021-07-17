@@ -32,10 +32,10 @@ export class DialogTransferCreditorComponent implements OnInit {
   ngOnInit(): void {
     this.recordService.findCurrentMonth().subscribe(monthCurrent => {
       this.monthCurrent = monthCurrent;
-    });
 
-    this.walletService.listAllCreditor().subscribe(response => {
-      this.wallets = response.content;
+      this.walletService.listAllCreditor(monthCurrent).subscribe(response => {
+        this.wallets = response.content;
+      });
     });
 
     this.recordCreditorOrigem = this.recordService.recordTransfer;

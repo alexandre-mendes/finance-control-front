@@ -1,5 +1,5 @@
 export interface WalletSummary {
-    totalDebtor?: number;
+    debitBalance?: number;
     totalCreditor?: number;
     percentageCommitted?: number;
     percentagePaid?: number;

@@ -1,5 +1,8 @@
 <mat-card>
-  <button color="primary" mat-raised-button (click)="openDialog()">Nova Carteira</button>
+  <button color="primary" mat-raised-button (click)="openDialog()">
+    <mat-icon>account_balance_wallet</mat-icon>
+    Nova Carteira
+  </button>
   <!-- <mat-form-field appearance="fill" style="float: right;">
     <mat-label>Ano</mat-label>
     <mat-select [(value)]="monthSelected" matInput required>
@@ -7,12 +10,16 @@
     </mat-select>
   </mat-form-field> -->
 
-  <mat-form-field appearance="fill" style="float: right;">
-    <mat-label>Mês</mat-label>
-    <mat-select [(value)]="monthSelected" matInput required>
-      <mat-option [value]="month" *ngFor="let month of months" (click)="reloadWallets()">{{ month.label }}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div style="display: flex; float: right;">
+    <mat-icon>filter_alt</mat-icon>
+  
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Mês</mat-label>
+      <mat-select [(value)]="monthSelected" matInput required>
+        <mat-option [value]="month" *ngFor="let month of months" (click)="reloadWallets()">{{ month.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </mat-card>
 <br>
 
@@ -20,12 +27,15 @@
   <div class="row">
     <div class="col">
       <mat-card>
-        <mat-card-title style="color: #2e7d32;">Total: {{walletSummary.totalCreditor | currency : 'BRL'}}</mat-card-title>
+        <mat-card-title style="color: #2e7d32;">
+          <mat-icon>mood</mat-icon>
+          Total: {{walletSummary.totalCreditor | currency : 'BRL'}}
+        </mat-card-title>
         <br>
-        <mat-card-subtitle>% Comprometido: {{walletSummary.percentageCommitted | percent: '1.2-2'}}</mat-card-subtitle>
+        <mat-card-subtitle>Comprometido: {{walletSummary.percentageCommitted | percent: '1.2-2'}}</mat-card-subtitle>
       </mat-card>
       <br>
-      <h2>Ativos</h2>
+      <h2>Créditos</h2>
       <div *ngFor="let wallet of walletsCreditor">
         <mat-card class="example-card">
           <!-- MENU -->
@@ -45,11 +55,11 @@
           <mat-card-header>
             <div mat-card-avatar >
               <button mat-mini-fab color="accent" (click)="redirectRecord(wallet)">
-                <mat-icon>visibility</mat-icon>
+                <mat-icon>trending_up</mat-icon>
               </button>
             </div>
             <mat-card-title><a (click)="redirectRecord(wallet)" style="cursor:pointer;">{{wallet.title}}</a></mat-card-title>
-            <mat-card-subtitle>Ativo</mat-card-subtitle>
+            <mat-card-subtitle>Crédito</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
           </mat-card-content>
@@ -60,15 +70,19 @@
         <br>
       </div>
     </div>
+
     <div class="col">
       <mat-card>
-        <mat-card-title style="color: #f44336;">Total: {{walletSummary.totalDebtor | currency : 'BRL'}}</mat-card-title>
+        <mat-card-title style="color: #f44336;">
+          <mat-icon>mood_bad</mat-icon>
+          Saldo Devedor: {{(walletSummary.debitBalance == undefined ? 0 : walletSummary.debitBalance) | currency : 'BRL'}}
+        </mat-card-title>
         <br>
-        <mat-card-subtitle>% Pago: {{walletSummary.percentagePaid | percent: '1.2-2'}}</mat-card-subtitle>
+        <mat-card-subtitle>Pago: {{walletSummary.percentagePaid | percent: '1.2-2'}}</mat-card-subtitle>
       </mat-card>
       <br>
 
-      <h2>Passivos</h2>
+      <h2>Débitos</h2>
       <div *ngFor="let wallet of walletsDebtor">
         <mat-card class="example-card">
           <!-- MENU -->
@@ -88,18 +102,19 @@
           <mat-card-header>
             <div mat-card-avatar>
               <button mat-mini-fab color="warn" (click)="redirectRecord(wallet)">
-                <mat-icon>visibility</mat-icon>
+                <mat-icon>trending_down</mat-icon>
               </button>
             </div>
             <mat-card-title><a (click)="redirectRecord(wallet)" style="cursor:pointer;">{{wallet.title}}</a></mat-card-title>
-            <mat-card-subtitle>Passivo</mat-card-subtitle>
+            <mat-card-subtitle>Débito</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
           </mat-card-content>
           <mat-card-actions>
             <mat-card-subtitle>
-              Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}} |
-              Total Pago: {{(wallet.valuePaid == undefined ? 0  : wallet.valuePaid) | currency: 'BRL'}}
+              Valor Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}} |
+              Valor a Pagar: {{
+                ((wallet.value == undefined ? 0  : wallet.value) - (wallet.valuePaid == undefined ? 0  : wallet.valuePaid)) | currency: 'BRL'}}
             </mat-card-subtitle>
           </mat-card-actions>
         </mat-card>

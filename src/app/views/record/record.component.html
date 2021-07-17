@@ -1,69 +1,33 @@
 <mat-card>
-  <button color="primary" mat-raised-button (click)="openDialog()">Novo Registro</button>
-</mat-card>
-<br>
-<mat-card>
-  <div class="flex">
-    <div>
-      <mat-card-title>{{wallet.title}}</mat-card-title>
-      <br>
-      <mat-card-subtitle>{{wallet.typeWallet === 'CREDITOR' ? 'Ativo' : 'Passivo'}}</mat-card-subtitle>
-    </div>
-    <div style="float: right;">
-      <button mat-button color="accent">Pagar Tudo</button>
-    </div>
+  <button color="primary" mat-raised-button (click)="openDialog()">
+    <mat-icon>add_circle_outline</mat-icon>
+    Novo Registro
+  </button>
+
+  <button mat-button color="accent">
+    <mat-icon>payment</mat-icon>
+    Pagar Tudo
+  </button>
+ 
+  <div style="display: flex; float: right;">
+    <mat-icon>filter_alt</mat-icon>
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Mês</mat-label>
+      <mat-select [(value)]="monthSelected" matInput required>
+        <mat-option [value]="month" *ngFor="let month of months" (click)="reloadRecords()">{{ month.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </mat-card>
+<br>
 
-<mat-tab-group [(selectedIndex)]="tabMesSeelecionada" (selectedTabChange)="loadRecordMonth($event)">
-  <mat-tab label="Janeiro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Fevereiro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Março">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Abril">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Maio">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Junho">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Julho">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Agosto">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Setembro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Outubro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Novembro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-  <mat-tab label="Dezembro">
-    <app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
-    <app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
-  </mat-tab>
-</mat-tab-group>
+<mat-card>
+  <mat-card-title>{{wallet.title}}</mat-card-title>
+  <mat-card-subtitle>{{wallet.typeWallet === 'CREDITOR' ? 'Crédito' : 'Débito'}}</mat-card-subtitle>
+</mat-card>
+<br>
+
+<app-table-record-debtor *ngIf="wallet.typeWallet === 'DEBTOR'" [dataSource]="records"></app-table-record-debtor>
+<app-table-record-creditor *ngIf="wallet.typeWallet === 'CREDITOR'" [dataSource]="records"></app-table-record-creditor>
 
 

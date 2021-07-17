@@ -1,6 +1,9 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <mat-card class="authentication">
-    <mat-card-title>Finance Control</mat-card-title><br>
+    <mat-card-title>
+        <mat-icon>savings</mat-icon>
+        Finance Control
+    </mat-card-title><br>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     <form (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-form-field>
@@ -12,13 +15,23 @@
         </mat-form-field>
         
         <button mat-raised-button color="primary" type="submit">
+            <mat-icon>login</mat-icon>
             Acessar
         </button>
         <br>
-        <a mat-stroked-button href="create-account">Criar Conta</a>
+        <a mat-stroked-button href="create-account">
+            <mat-icon>person_add_alt_1</mat-icon>
+            Criar Conta
+        </a>
         <br>
-        <a mat-stroked-button href="create-account">Convidado</a>
+        <a mat-stroked-button href=".">
+            <mat-icon>group_add</mat-icon>
+            Convidado
+        </a>
         <br>
-        <a mat-button routerLink=".">Esqueci a senha</a>
+        <a mat-button routerLink=".">
+            <mat-icon>password</mat-icon>
+            Esqueci a senha
+        </a>
     </form>
 </mat-card>

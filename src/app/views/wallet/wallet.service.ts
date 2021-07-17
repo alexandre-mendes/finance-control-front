@@ -34,8 +34,8 @@ export class WalletService {
     );
   }
 
-  listAllCreditor(): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallet?typeWallet=CREDITOR`).pipe(
+  listAllCreditor(month: number): Observable<Page<Wallet>> {
+    return this.http.get<Wallet[]>(`${environment.api}/wallet/${month}?typeWallet=CREDITOR`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
