@@ -33,7 +33,7 @@ export class DialogTransferCreditorComponent implements OnInit {
     this.recordService.findCurrentMonth().subscribe(monthCurrent => {
       this.monthCurrent = monthCurrent;
 
-      this.walletService.listAllCreditor(monthCurrent).subscribe(response => {
+      this.walletService.listAllCreditor(this.recordService.monthSelected, this.recordService.yearSelected).subscribe(response => {
         this.wallets = response.content;
       });
     });
@@ -42,7 +42,7 @@ export class DialogTransferCreditorComponent implements OnInit {
   }
 
   selectedWallet() {
-    this.recordService.listAllCreditor(this.uuidWallet, this.monthCurrent).subscribe(response => {
+    this.recordService.listAllCreditor(this.uuidWallet).subscribe(response => {
       this.records = response.content.filter(record => record.uuid !== this.recordCreditorOrigem.uuid && record.received);
     });
   }

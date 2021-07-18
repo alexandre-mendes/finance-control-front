@@ -19,6 +19,7 @@ export class RecordService {
   recordPayment: RecordDebtor = {};
   recordTransfer: RecordCreditor = {};
   monthSelected: number = 1;
+  yearSelected: number = 1;
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -32,7 +33,7 @@ export class RecordService {
 
   createRecordDebtor(record: RecordDebtor): Observable<RecordDebtor> {
     record.walletUuid = this.wallet.uuid;
-    return this.http.post<RecordDebtor>(`${environment.api}/record-debtor`, record).pipe(
+    return this.http.post<RecordDebtor>(`${environment.api}/records-debtor`, record).pipe(
       map(obj => 
         { this.updateRecords.emit(obj.title); 
           return obj;                             }),
@@ -42,7 +43,7 @@ export class RecordService {
 
   createRecordCreditor(record: RecordCreditor): Observable<RecordCreditor> {
     record.walletUuid = this.wallet.uuid;
-    return this.http.post<RecordCreditor>(`${environment.api}/record-creditor`, record).pipe(
+    return this.http.post<RecordCreditor>(`${environment.api}/records-creditor`, record).pipe(
       map(obj => 
         { this.updateRecords.emit(obj.title); 
           return obj;                             }),
@@ -50,22 +51,22 @@ export class RecordService {
     );
   }
 
-  listAllDebtor(uuidWallet?: string, month?: number): Observable<Page<RecordDebtor>> {
-    return this.http.get<Page<RecordDebtor>>(`${environment.api}/record-debtor/wallet/${uuidWallet}/month/${month}`).pipe(
+  listAllDebtor(uuidWallet?: string): Observable<Page<RecordDebtor>> {
+    return this.http.get<Page<RecordDebtor>>(`${environment.api}/records-debtor/wallets/${uuidWallet}/months/${this.monthSelected}/years/${this.yearSelected}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
-  listAllCreditor(uuidWallet?: string, month?: number): Observable<Page<RecordCreditor>> {
-    return this.http.get<Page<RecordCreditor>>(`${environment.api}/record-creditor/wallet/${uuidWallet}/month/${month}`).pipe(
+  listAllCreditor(uuidWallet?: string): Observable<Page<RecordCreditor>> {
+    return this.http.get<Page<RecordCreditor>>(`${environment.api}/records-creditor/wallets/${uuidWallet}/months/${this.monthSelected}/years/${this.yearSelected}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
   pay(uuidDebtor: string, uuidCreditor: string): Observable<void> {
-    return this.http.post<void>(`${environment.api}/transaction/pay`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
+    return this.http.post<void>(`${environment.api}/transactions/pays`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
           return obj;                       }),
@@ -74,7 +75,7 @@ export class RecordService {
   }
 
   transfer(uuidOrigin: string, uuidDestiny: string, valueTransfer: number): Observable<void> {
-    return this.http.post<void>(`${environment.api}/transaction/transfer`, 
+    return this.http.post<void>(`${environment.api}/transactions/transfers`, 
     {uuidOrigin: uuidOrigin, uuidDestiny: uuidDestiny, valueTransfer: valueTransfer}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
@@ -86,6 +87,20 @@ export class RecordService {
   findCurrentMonth(): Observable<number> {
     return this.http.get<number>(`${environment.api}/date/month/current`).pipe(
       map(obj => obj),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  findYears(): Observable<Page<number>> {
+    return this.http.get<Page<number>>(`${environment.api}/date/years`).pipe(
+      map(res => res),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  findCurrentYear(): Observable<number> {
+    return this.http.get<number>(`${environment.api}/date/years/current`).pipe(
+      map(res => res),
       catchError(e => this.messageService.errorHandler(e))
     )
   }

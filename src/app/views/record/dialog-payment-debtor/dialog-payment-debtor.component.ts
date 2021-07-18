@@ -20,7 +20,6 @@ export class DialogPaymentDebtorComponent implements OnInit {
   recordDebtor: RecordDebtor = {};
   recordCreditor: RecordCreditor = {};
   uuidWallet: string = "";
-  monthCurrent: number = 0;
 
   constructor(private route: ActivatedRoute,
     private walletService: WalletService,
@@ -29,19 +28,15 @@ export class DialogPaymentDebtorComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogPaymentDebtorComponent>) { }
 
   ngOnInit(): void {
-    this.recordService.findCurrentMonth().subscribe(monthCurrent => {
-      this.monthCurrent = monthCurrent;
-      
-      this.walletService.listAllCreditor(monthCurrent).subscribe(response => {
-        this.wallets = response.content;
-      });
+    this.walletService.listAllCreditor(this.recordService.monthSelected, this.recordService.yearSelected).subscribe(response => {
+      this.wallets = response.content;
     });
 
     this.recordDebtor = this.recordService.recordPayment;
   }
 
   selectedWallet() {
-    this.recordService.listAllCreditor(this.uuidWallet, this.monthCurrent).subscribe(response => {
+    this.recordService.listAllCreditor(this.uuidWallet).subscribe(response => {
       this.records = response.content.filter(
         record => record.value != undefined 
         && this.recordDebtor.value != undefined 

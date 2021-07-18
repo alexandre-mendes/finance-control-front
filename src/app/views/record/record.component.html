@@ -17,6 +17,13 @@
         <mat-option [value]="month" *ngFor="let month of months" (click)="reloadRecords()">{{ month.label }}</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Ano</mat-label>
+      <mat-select [(value)]="yearSelected" matInput required>
+        <mat-option [value]="year" *ngFor="let year of years" (click)="reloadRecords()">{{ year }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </mat-card>
 <br>

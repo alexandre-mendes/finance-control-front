@@ -33,6 +33,8 @@ export class RecordComponent implements OnInit {
     {label: "Novembro", value: 11},
     {label: "Dezembro", value: 12},
   ]
+  yearSelected: number = 0;
+  years: number[] = [];
 
   constructor(public dialogDebtor: MatDialog,
     public dialogCreditor: MatDialog, 
@@ -48,11 +50,11 @@ export class RecordComponent implements OnInit {
 
   async initialize() {
     this.wallet = this.walletService.wallet;
-    console.log("INITIALIZE ", this.wallet)
     this.recordService.findCurrentMonth().subscribe(mesAtual => {
       this.monthSelected = this.months.filter(month => month.value == mesAtual)[0]
       this.recordService.monthSelected = mesAtual;
-
+      this.findCurrentYear();
+      this.findYears()
       this.listAll();
     })
   }
@@ -66,20 +68,34 @@ export class RecordComponent implements OnInit {
   }
 
   listAllDebtor() {
-    this.recordService.listAllDebtor(this.wallet.uuid, this.monthSelected.value).subscribe(page => {
+    this.recordService.listAllDebtor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
     })
   } 
 
   listAllCreditor() {
-    this.recordService.listAllCreditor(this.wallet.uuid, this.monthSelected.value).subscribe(page => {
+    this.recordService.listAllCreditor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
     })
   } 
 
   reloadRecords() {
-    this.listAll();
     this.recordService.monthSelected = this.monthSelected.value;
+    this.recordService.yearSelected = this.yearSelected
+    this.listAll();
+  }
+
+  findYears() {
+    this.walletService.findYears().subscribe(res => {
+      this.years = res.content;
+    })
+  }
+
+  findCurrentYear() {
+    this.walletService.findCurrentYear().subscribe(res => {
+      this.yearSelected = res;
+      this.recordService.yearSelected = this.yearSelected;
+    })
   }
 
   openDialog() {

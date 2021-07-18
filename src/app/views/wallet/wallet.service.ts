@@ -19,7 +19,7 @@ export class WalletService {
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   create(wallet: Wallet): Observable<Wallet> {
-    return this.http.post<Wallet>(`${environment.api}/wallet`, wallet).pipe(
+    return this.http.post<Wallet>(`${environment.api}/wallets`, wallet).pipe(
       map(obj => 
         { this.issueWalletCreated.emit(obj.title); 
           return obj;                             }),
@@ -27,22 +27,22 @@ export class WalletService {
     );
   }
 
-  listAll(month: number): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallet/${month}`).pipe(
+  listAll(month: number, year: number): Observable<Page<Wallet>> {
+    return this.http.get<Wallet[]>(`${environment.api}/wallets/months/${month}/years/${year}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
-  listAllCreditor(month: number): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallet/${month}?typeWallet=CREDITOR`).pipe(
+  listAllCreditor(month: number, year: number): Observable<Page<Wallet>> {
+    return this.http.get<Wallet[]>(`${environment.api}/wallets/months/${month}/years/${year}?typeWallet=CREDITOR`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
-  findWalletsSummary(month: number): Observable<WalletSummary> {
-    return this.http.get<WalletSummary>(`${environment.api}/wallet/summary/${month}`).pipe(
+  findWalletsSummary(month: number, year: number): Observable<WalletSummary> {
+    return this.http.get<WalletSummary>(`${environment.api}/wallets/summarys/months/${month}/years/${year}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     )
@@ -51,6 +51,20 @@ export class WalletService {
   findCurrentMonth(): Observable<number> {
     return this.http.get<number>(`${environment.api}/date/month/current`).pipe(
       map(obj => obj),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  findYears(): Observable<Page<number>> {
+    return this.http.get<Page<number>>(`${environment.api}/date/years`).pipe(
+      map(res => res),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
+  findCurrentYear(): Observable<number> {
+    return this.http.get<number>(`${environment.api}/date/years/current`).pipe(
+      map(res => res),
       catchError(e => this.messageService.errorHandler(e))
     )
   }

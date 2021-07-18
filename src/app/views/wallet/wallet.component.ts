@@ -32,6 +32,8 @@ export class WalletComponent implements OnInit {
     {label: "Novembro", value: 11},
     {label: "Dezembro", value: 12},
   ]
+  yearSelected: number = 0;
+  years: number[] = [];
 
   constructor(public dialog: MatDialog, 
     private walletService: WalletService,
@@ -42,6 +44,8 @@ export class WalletComponent implements OnInit {
       this.monthSelected = this.months.filter(month => month.value === response)[0];
       this.findWalletsSummary();
       this.listAll();
+      this.findCurrentYear();
+      this.findYears();
     })
     
     this.walletService.issueWalletCreated.subscribe(() => {
@@ -59,14 +63,26 @@ export class WalletComponent implements OnInit {
   }
 
   listAll() {
-    this.walletService.listAll(this.monthSelected.value).subscribe(response => {
+    this.walletService.listAll(this.monthSelected.value, this.yearSelected).subscribe(response => {
       this.walletsDebtor = response.content.filter(wallet => wallet.typeWallet === 'DEBTOR');
       this.walletsCreditor = response.content.filter(wallet => wallet.typeWallet === 'CREDITOR');
     })
   }
 
+  findYears() {
+    this.walletService.findYears().subscribe(res => {
+      this.years = res.content;
+    })
+  }
+
+  findCurrentYear() {
+    this.walletService.findCurrentYear().subscribe(res => {
+      this.yearSelected = res;
+    })
+  }
+
   findWalletsSummary() {
-    this.walletService.findWalletsSummary(this.monthSelected.value).subscribe(response => {
+    this.walletService.findWalletsSummary(this.monthSelected.value, this.yearSelected).subscribe(response => {
       this.walletSummary = response;
     })
   }
