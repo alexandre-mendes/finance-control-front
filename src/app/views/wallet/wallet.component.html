@@ -3,16 +3,9 @@
     <mat-icon>account_balance_wallet</mat-icon>
     Nova Carteira
   </button>
-  <!-- <mat-form-field appearance="fill" style="float: right;">
-    <mat-label>Ano</mat-label>
-    <mat-select [(value)]="monthSelected" matInput required>
-      <mat-option [value]="month" *ngFor="let month of months">{{ month.label }}</mat-option>
-    </mat-select>
-  </mat-form-field> -->
 
   <div style="display: flex; float: right;">
-    <mat-icon>filter_alt</mat-icon>
-  
+    <mat-icon>filter_alt</mat-icon>  
     <mat-form-field appearance="fill" style="float: right;">
       <mat-label>Mês</mat-label>
       <mat-select [(value)]="monthSelected" matInput required>
@@ -23,17 +16,24 @@
 </mat-card>
 <br>
 
+
 <div class="container">
   <div class="row">
     <div class="col">
-      <mat-card>
-        <mat-card-title style="color: #2e7d32;">
-          <mat-icon>mood</mat-icon>
-          Total: {{walletSummary.totalCreditor | currency : 'BRL'}}
-        </mat-card-title>
-        <br>
-        <mat-card-subtitle>Comprometido: {{walletSummary.percentageCommitted | percent: '1.2-2'}}</mat-card-subtitle>
-      </mat-card>
+
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="color: #2e7d32; margin-top: 20px;">
+            <h1><b>Total:</b> {{walletSummary.totalCreditor | currency : 'BRL'}}</h1>
+          </mat-panel-title>
+          <mat-panel-description style="margin-top: 20px;">
+            <mat-icon>mood</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p><b>Comprometido:</b> {{walletSummary.percentageCommitted | percent: '1.2-2'}}</p>
+      </mat-expansion-panel>   
+
       <br>
       <h2>Créditos</h2>
       <div *ngFor="let wallet of walletsCreditor">
@@ -72,16 +72,22 @@
     </div>
 
     <div class="col">
-      <mat-card>
-        <mat-card-title style="color: #f44336;">
-          <mat-icon>mood_bad</mat-icon>
-          Saldo Devedor: {{(walletSummary.debitBalance == undefined ? 0 : walletSummary.debitBalance) | currency : 'BRL'}}
-        </mat-card-title>
-        <br>
-        <mat-card-subtitle>Pago: {{walletSummary.percentagePaid | percent: '1.2-2'}}</mat-card-subtitle>
-      </mat-card>
-      <br>
 
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="color: #f44336; margin-top: 20px;">
+            <h1><b>Saldo Devedor:</b> {{(walletSummary.debitBalance == undefined ? 0 : walletSummary.debitBalance) | currency : 'BRL'}}</h1>
+          </mat-panel-title>
+          <mat-panel-description style="margin-top: 20px;">
+            <mat-icon>mood_bad</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p><b>Valor Total:</b> {{(walletSummary.totalDebtor == undefined ? 0 : walletSummary.totalDebtor) | currency : 'BRL'}} </p>
+        <p><b>Valor Pago:</b> {{(walletSummary.totalPaid == undefined ? 0 : walletSummary.totalPaid) | currency : 'BRL'}}</p>
+      </mat-expansion-panel> 
+
+      <br>
       <h2>Débitos</h2>
       <div *ngFor="let wallet of walletsDebtor">
         <mat-card class="example-card">
@@ -113,7 +119,7 @@
           <mat-card-actions>
             <mat-card-subtitle>
               Valor Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}} |
-              Valor a Pagar: {{
+              Valor à Pagar: {{
                 ((wallet.value == undefined ? 0  : wallet.value) - (wallet.valuePaid == undefined ? 0  : wallet.valuePaid)) | currency: 'BRL'}}
             </mat-card-subtitle>
           </mat-card-actions>

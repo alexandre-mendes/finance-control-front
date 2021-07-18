@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-
+  panelOpenState = false;
   walletsDebtor: Wallet[] = [];
   walletsCreditor: Wallet[] = [];
   walletSummary: WalletSummary = {};
