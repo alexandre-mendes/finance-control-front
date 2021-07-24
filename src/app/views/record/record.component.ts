@@ -17,7 +17,7 @@ import { Month } from 'src/app/shared/month.model';
 })
 export class RecordComponent implements OnInit {
 
-  records: {}[] = []
+  records: {value?: number, paid?: boolean}[] = []
   wallet: Wallet = {};
   monthSelected: Month = {label: "Janeiro", value: 1};
   months: Month[] = [
@@ -36,6 +36,8 @@ export class RecordComponent implements OnInit {
   ]
   yearSelected: number = 0;
   years: number[] = [];
+  totalCreditor?: number = 0;
+  totalDebtor?: number = 0;
 
   constructor(public dialogDebtor: MatDialog,
     public dialogCreditor: MatDialog, 
@@ -77,12 +79,18 @@ export class RecordComponent implements OnInit {
   listAllDebtor() {
     this.recordService.listAllDebtor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
+      console.log(this.records)
+      this.totalDebtor = this.records.length > 0 ? this.records.filter(record => !record.paid)
+        .map(record => record.value)
+        .reduce((acumulator, currentValue) => (acumulator != undefined ? acumulator : 0) + (currentValue != undefined ? currentValue : 0)) : 0;
     })
   } 
 
   listAllCreditor() {
     this.recordService.listAllCreditor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
+      this.totalCreditor = this.records.length > 0 ? this.records.map(record => record.value)
+        .reduce((acumulator, currentValue) => (acumulator != undefined ? acumulator : 0) + (currentValue != undefined ? currentValue : 0)) : 0;
     })
   } 
 

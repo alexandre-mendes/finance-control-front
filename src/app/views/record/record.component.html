@@ -36,6 +36,8 @@
 <mat-card>
   <mat-card-title>{{wallet.title}}</mat-card-title>
   <mat-card-subtitle>{{wallet.typeWallet === 'CREDITOR' ? 'Crédito' : 'Débito'}}</mat-card-subtitle>
+  <h1 style="color: #2e7d32;" *ngIf="wallet.typeWallet === 'CREDITOR'"><b>Saldo Credor:</b> {{(totalCreditor == undefined ? 0 : totalCreditor) | currency: 'BRL'}}</h1>
+  <h1 style="color: #f44336;" *ngIf="wallet.typeWallet === 'DEBTOR'"><b>Saldo Devedor:</b> {{(totalDebtor == undefined ? 0 : totalDebtor) | currency: 'BRL'}}</h1>
 </mat-card>
 <br>
 
