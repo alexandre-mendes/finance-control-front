@@ -16,11 +16,9 @@ import { RecordService } from '../record.service';
 export class DialogTransferCreditorComponent implements OnInit {
 
   wallets: Wallet[] = [];
-  records: RecordCreditor[] = [];
-  recordCreditorOrigem: RecordCreditor = {};
-  recordCreditorDestino: RecordCreditor = {};
+  walletOrigin: Wallet = {};
+  walletDestiny: Wallet = {};
   valueTransfer?: number;
-  uuidWallet: string = "";
   monthCurrent: number = 0;
 
   constructor(private route: ActivatedRoute,
@@ -30,32 +28,22 @@ export class DialogTransferCreditorComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogTransferCreditorComponent>) { }
 
   ngOnInit(): void {
-    this.recordService.findCurrentMonth().subscribe(monthCurrent => {
-      this.monthCurrent = monthCurrent;
-
-      this.walletService.listAllCreditor(this.recordService.monthSelected, this.recordService.yearSelected).subscribe(response => {
-        this.wallets = response.content;
-      });
+    this.walletService.listAllCreditor(this.recordService.monthSelected, this.recordService.yearSelected).subscribe(response => {
+      this.wallets = response.content;
     });
 
-    this.recordCreditorOrigem = this.recordService.recordTransfer;
-  }
-
-  selectedWallet() {
-    this.recordService.listAllCreditor(this.uuidWallet).subscribe(response => {
-      this.records = response.content.filter(record => record.uuid !== this.recordCreditorOrigem.uuid && record.received);
-    });
+    this.walletOrigin = this.walletService.wallet;
   }
 
   confirm() {
-    if (this.recordCreditorOrigem.uuid != undefined 
-      && this.recordCreditorOrigem.value != undefined
-      && this.recordCreditorDestino.uuid != undefined 
+    if (this.walletOrigin.uuid != undefined 
+      && this.walletOrigin.value != undefined
+      && this.walletDestiny.uuid != undefined 
       && this.valueTransfer != undefined 
       && this.valueTransfer > 0 
-      && this.valueTransfer <= this.recordCreditorOrigem.value) {
+      && this.valueTransfer <= this.walletOrigin.value) {
 
-      this.recordService.transfer(this.recordCreditorOrigem.uuid, this.recordCreditorDestino.uuid, this.valueTransfer).subscribe(() => {
+      this.recordService.transfer(this.walletOrigin.uuid, this.walletDestiny.uuid, this.valueTransfer).subscribe(() => {
         this.messageService.showMessage("Transferência efetuada com sucesso.")
         this.dialogRef.close();
       })

@@ -17,7 +17,6 @@ export class RecordService {
   updateRecords = new EventEmitter<string>();
   wallet: Wallet = {};
   recordPayment: RecordDebtor = {};
-  recordTransfer: RecordCreditor = {};
   monthSelected: number = 1;
   yearSelected: number = 1;
 
@@ -65,8 +64,8 @@ export class RecordService {
     );
   }
 
-  pay(uuidDebtor: string, uuidCreditor: string): Observable<void> {
-    return this.http.post<void>(`${environment.api}/transactions/pays`, {uuidDebtor: uuidDebtor, uuidCreditor: uuidCreditor}).pipe(
+  pay(uuidRecordDebtor: string, uuidWalletCreditor: string): Observable<void> {
+    return this.http.post<void>(`${environment.api}/transactions/pays`, {uuidRecordDebtor: uuidRecordDebtor, uuidWalletCreditor: uuidWalletCreditor}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
           return obj;                       }),

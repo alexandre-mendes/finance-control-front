@@ -22,16 +22,9 @@ export class TableRecordCreditorComponent implements OnInit {
   wallet: Wallet = {};
 
   constructor(private walletService: WalletService,
-    private recordService: RecordService,
-    public dialog: MatDialog) { }
+    private recordService: RecordService) { }
 
   ngOnInit(): void {
     this.wallet = this.walletService.wallet;
   }
-
-  transfer(recordTransfer: RecordCreditor) {
-    this.recordService.recordTransfer = recordTransfer;
-    this.dialog.open(DialogTransferCreditorComponent);
-  }
-
 }

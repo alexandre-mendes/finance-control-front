@@ -4,9 +4,14 @@
     Novo Registro
   </button>
 
-  <button mat-button color="accent">
+  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'DEBITOR'">
     <mat-icon>payment</mat-icon>
     Pagar Tudo
+  </button>
+
+  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'CREDITOR'" (click)="transfer()">
+    <mat-icon>send</mat-icon>
+    Transferir
   </button>
  
   <div style="display: flex; float: right;">

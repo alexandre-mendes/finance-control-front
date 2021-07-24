@@ -1,3 +1,4 @@
+import { DialogTransferCreditorComponent } from './dialog-transfer-creditor/dialog-transfer-creditor.component';
 import { DialogRecordCreditorComponent } from './dialog-record-creditor/dialog-record-creditor.component';
 import { Wallet } from './../wallet/wallet.model';
 import { RecordService } from './record.service';
@@ -39,7 +40,8 @@ export class RecordComponent implements OnInit {
   constructor(public dialogDebtor: MatDialog,
     public dialogCreditor: MatDialog, 
     private recordService: RecordService,
-    private walletService: WalletService) { }
+    private walletService: WalletService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initialize();
@@ -53,9 +55,14 @@ export class RecordComponent implements OnInit {
     this.recordService.findCurrentMonth().subscribe(mesAtual => {
       this.monthSelected = this.months.filter(month => month.value == mesAtual)[0]
       this.recordService.monthSelected = mesAtual;
-      this.findCurrentYear();
-      this.findYears()
-      this.listAll();
+
+      this.walletService.findCurrentYear().subscribe(res => {
+        this.yearSelected = res;
+        this.recordService.yearSelected = this.yearSelected;
+
+        this.findYears()
+        this.listAll();
+      })
     })
   }
 
@@ -91,13 +98,6 @@ export class RecordComponent implements OnInit {
     })
   }
 
-  findCurrentYear() {
-    this.walletService.findCurrentYear().subscribe(res => {
-      this.yearSelected = res;
-      this.recordService.yearSelected = this.yearSelected;
-    })
-  }
-
   openDialog() {
     this.recordService.wallet = this.wallet;
 
@@ -108,4 +108,7 @@ export class RecordComponent implements OnInit {
     }
   }
   
+  transfer() {
+    this.dialog.open(DialogTransferCreditorComponent);
+  }
 }
