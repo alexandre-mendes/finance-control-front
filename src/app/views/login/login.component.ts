@@ -27,9 +27,11 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     try {
+      this.loading = true;
       window.localStorage.removeItem('token');
       const result = await this.accountService.login(this.login);
       this.router.navigate(['wallet']);
+      this.loading = false;
     } catch (error) {
       this.loading = false;
       this.messageService.showMessage("Usuário ou senha inválido.", true);
