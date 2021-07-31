@@ -54,18 +54,12 @@ export class RecordComponent implements OnInit {
 
   async initialize() {
     this.wallet = this.walletService.wallet;
-    this.recordService.findCurrentMonth().subscribe(mesAtual => {
-      this.monthSelected = this.months.filter(month => month.value == mesAtual)[0]
-      this.recordService.monthSelected = mesAtual;
 
-      this.walletService.findCurrentYear().subscribe(res => {
-        this.yearSelected = res;
-        this.recordService.yearSelected = this.yearSelected;
+    this.monthSelected = this.months.filter(month => month.value == this.walletService.monthSelected?.value)[0]
+    this.yearSelected = this.walletService.yearSelected != undefined ? this.walletService.yearSelected : 0;
 
-        this.findYears()
-        this.listAll();
-      })
-    })
+    this.findYears()
+    this.listAll();
   }
 
   listAll() {

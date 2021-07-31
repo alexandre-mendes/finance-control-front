@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'src/app/shared/message.service';
 import { Page } from 'src/app/shared/page.model';
 import { WalletSummary } from './wallet-summary.model';
+import { Month } from 'src/app/shared/month.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class WalletService {
 
   issueWalletCreated = new EventEmitter<string>();
   wallet: Wallet = {};
+  monthSelected?: Month = {label: '', value: 0};
+  yearSelected?: number;
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 

@@ -41,10 +41,19 @@ export class WalletComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletService.findCurrentMonth().subscribe(response => {
-      this.monthSelected = this.months.filter(month => month.value == response)[0];
-
+      if(this.walletService.monthSelected != undefined && this.walletService.monthSelected.value != 0) {
+        this.monthSelected = this.months.filter(month => month.value == this.walletService.monthSelected?.value)[0];
+      } else {
+        this.monthSelected = this.months.filter(month => month.value == response)[0];
+      }
+      
       this.walletService.findCurrentYear().subscribe(res => {
-        this.yearSelected = res;
+        if(this.walletService.yearSelected != undefined) {
+          this.yearSelected = this.walletService.yearSelected;
+        } else {
+          this.yearSelected = res;
+        }
+        
         this.findYears();
         this.findWalletsSummary();
         this.listAll();
@@ -71,7 +80,6 @@ export class WalletComponent implements OnInit {
 
   listAll() {
     this.walletService.listAll(this.monthSelected.value, this.yearSelected).subscribe(response => {
-      console.log("Foi")
       this.walletsDebtor = response.content.filter(wallet => wallet.typeWallet === 'DEBTOR');
       this.walletsCreditor = response.content.filter(wallet => wallet.typeWallet === 'CREDITOR');
     })
@@ -91,6 +99,8 @@ export class WalletComponent implements OnInit {
 
   redirectRecord(wallet: Wallet) {
     this.walletService.wallet = wallet;
+    this.walletService.monthSelected = this.monthSelected;
+    this.walletService.yearSelected = this.yearSelected;
     this.router.navigate([`wallet/record`]);
   }
 
