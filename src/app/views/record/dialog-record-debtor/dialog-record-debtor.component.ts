@@ -13,7 +13,7 @@ import { RecordService } from '../record.service';
 })
 export class DialogRecordDebtorComponent implements OnInit {
 
-  record: RecordDebtor = {};
+  record: RecordDebtor = {installments: 1};
   dayWallet?: number = undefined;
 
   constructor(private route: ActivatedRoute,

@@ -63,6 +63,9 @@ export class RecordComponent implements OnInit {
   }
 
   listAll() {
+    this.recordService.monthSelected = this.monthSelected.value;
+    this.recordService.yearSelected = this.yearSelected;
+
     if(this.wallet.typeWallet === "DEBTOR") {
       this.listAllDebtor();
     } else {
@@ -73,7 +76,6 @@ export class RecordComponent implements OnInit {
   listAllDebtor() {
     this.recordService.listAllDebtor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
-      console.log(this.records)
       this.totalDebtor = this.records.length > 0 ? this.records.filter(record => !record.paid)
         .map(record => record.value)
         .reduce((acumulator, currentValue) => (acumulator != undefined ? acumulator : 0) + (currentValue != undefined ? currentValue : 0)) : 0;
