@@ -1,8 +1,8 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="dateReceivement">
-      <th mat-header-cell *matHeaderCellDef> Recebimento </th>
-      <td mat-cell *matCellDef="let element"> {{element.dateReceivement | date : 'dd/MM/yyyy'}} </td>
+    <ng-container matColumnDef="dateTransaction">
+      <th mat-header-cell *matHeaderCellDef> Data da Transação </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateTransaction | date : 'dd/MM/yyyy'}} </td>
     </ng-container>
   
     <ng-container matColumnDef="title">
@@ -18,7 +18,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button color="warn" [disabled]="element.paid">
+        <button (click)="cancel(element.uuid)" mat-button color="warn" [disabled]="element.paid">
           <mat-icon>free_cancellation</mat-icon>
           Cancelar
         </button>

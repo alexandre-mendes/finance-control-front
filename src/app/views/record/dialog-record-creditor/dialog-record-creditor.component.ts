@@ -28,7 +28,7 @@ export class DialogRecordCreditorComponent implements OnInit {
     let date = new Date();
     date.setDate(this.walletService.wallet.dayWallet || 1)
     date.setMonth(this.recordService.monthSelected)
-    this.record.dateReceivement = date;
+    this.record.dateTransaction = date;
 
     this.dayWallet = this.walletService.wallet.dayWallet;
   }
