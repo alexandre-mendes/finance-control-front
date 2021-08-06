@@ -3,6 +3,9 @@ import { RecordService } from './../record.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { WalletService } from '../../wallet/wallet.service';
 import { MessageService } from 'src/app/shared/message.service';
+import { DialogConfirmComponent } from 'src/app/shared/dialog-confirm/dialog-confirm.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RecordCreditor } from '../record-creditor.model';
 
 
 @Component({
@@ -21,15 +24,30 @@ export class TableRecordCreditorComponent implements OnInit {
 
   constructor(private walletService: WalletService,
     private recordService: RecordService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.wallet = this.walletService.wallet;
   }
 
-  cancel(uuid: string) {
-    this.recordService.cancelCreditor(uuid).subscribe(res => {
-      this.messageService.showMessage("Cancelamento realizado com sucesso.")
-    })
+  cancel(record: RecordCreditor) {
+
+    const confirmDialog = this.dialog.open(DialogConfirmComponent, {
+      data: {
+        title: 'Confirmação',
+        message: 'Deseja realmente cancelar a transação ' + record.title + '?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true && record.uuid != undefined) {
+        this.recordService.cancelCreditor(record.uuid).subscribe(res => {
+          this.messageService.showMessage("Cancelamento realizado com sucesso.")
+        })
+      }
+    });
+
+
+    
   }
 }

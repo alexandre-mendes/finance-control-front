@@ -18,7 +18,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="cancel(element.uuid)" mat-button color="warn" [disabled]="element.paid">
+        <button (click)="cancel(element)" mat-button color="warn" [disabled]="element.paid">
           <mat-icon>free_cancellation</mat-icon>
           Cancelar
         </button>
