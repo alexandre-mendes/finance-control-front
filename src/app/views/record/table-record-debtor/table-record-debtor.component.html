@@ -31,9 +31,9 @@
           Pagar
         </button>
 
-        <button mat-button color="warn" [disabled]="element.paid">
+        <button mat-button color="warn" [disabled]="element.paid" (click)="delete(element)">
           <mat-icon>free_cancellation</mat-icon>
-          Cancelar
+          Remover
         </button>
       </td>
     </ng-container>

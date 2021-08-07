@@ -1,10 +1,10 @@
 <mat-card>
-  <button color="primary" mat-raised-button *ngIf="wallet.typeWallet === 'DEBITOR'" (click)="openDialog()">
+  <button color="primary" mat-raised-button *ngIf="wallet.typeWallet === 'DEBTOR'" (click)="openDialog()">
     <mat-icon>add_circle_outline</mat-icon>
-    Novo Registro
+    Novo Débito
   </button>
 
-  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'DEBITOR'">
+  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'DEBTOR'">
     <mat-icon>payment</mat-icon>
     Pagar Tudo
   </button>

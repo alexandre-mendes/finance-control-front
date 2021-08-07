@@ -90,6 +90,13 @@ export class RecordService {
     );
   }
 
+  deleteDebtor(registrationCode: string): Observable<void> {
+    return this.http.delete<void>(`${environment.api}/records-debtor/${registrationCode}`).pipe(
+      map(obj => { this.updateRecords.emit(""); return obj; }),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
   findCurrentMonth(): Observable<number> {
     return this.http.get<number>(`${environment.api}/date/month/current`).pipe(
       map(obj => obj),

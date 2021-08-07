@@ -32,7 +32,6 @@ export class TableRecordCreditorComponent implements OnInit {
   }
 
   cancel(record: RecordCreditor) {
-
     const confirmDialog = this.dialog.open(DialogConfirmComponent, {
       data: {
         title: 'Confirmação',
@@ -46,8 +45,5 @@ export class TableRecordCreditorComponent implements OnInit {
         })
       }
     });
-
-
-    
   }
 }
