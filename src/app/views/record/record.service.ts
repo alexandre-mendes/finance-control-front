@@ -73,6 +73,17 @@ export class RecordService {
     )
   }
 
+  payAll(uuidWalletCreditor: string, uuidWalletDebtor: string): Observable<void> {
+    console.log("AQUIIIII", uuidWalletDebtor)
+    return this.http.post<void>(`${environment.api}/transactions/pay-all`, 
+    {uuidWalletDebtor, uuidWalletCreditor, month: this.monthSelected, year: this.yearSelected}).pipe(
+      map(obj => 
+        { this.updateRecords.emit("");
+          return obj;                       }),
+      catchError(e => this.messageService.errorHandler(e))
+    )
+  }
+
   transfer(uuidOrigin: string, uuidDestiny: string, valueTransfer: number): Observable<void> {
     return this.http.post<void>(`${environment.api}/transactions/transfers`, 
     {uuidOrigin: uuidOrigin, uuidDestiny: uuidDestiny, valueTransfer: valueTransfer}).pipe(

@@ -4,7 +4,7 @@
     Novo Débito
   </button>
 
-  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'DEBTOR'">
+  <button mat-button color="accent" *ngIf="wallet.typeWallet === 'DEBTOR'" (click)="openDialogPayment()">
     <mat-icon>payment</mat-icon>
     Pagar Tudo
   </button>

@@ -9,6 +9,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs/tab-group';
 import { WalletService } from '../wallet/wallet.service';
 import { DialogRecordDebtorComponent } from './dialog-record-debtor/dialog-record-debtor.component';
 import { Month } from 'src/app/shared/month.model';
+import { DialogPaymentAllDebtorComponent } from './dialog-payment-all-debtor/dialog-payment-all-debtor.component';
 
 @Component({
   selector: 'app-record',
@@ -39,8 +40,7 @@ export class RecordComponent implements OnInit {
   totalCreditor?: number = 0;
   totalDebtor?: number = 0;
 
-  constructor(public dialogDebtor: MatDialog,
-    public dialogCreditor: MatDialog, 
+  constructor( 
     private recordService: RecordService,
     private walletService: WalletService,
     public dialog: MatDialog) { }
@@ -106,10 +106,14 @@ export class RecordComponent implements OnInit {
     this.recordService.wallet = this.wallet;
 
     if(this.wallet.typeWallet === "DEBTOR") {
-      this.dialogDebtor.open(DialogRecordDebtorComponent);
+      this.dialog.open(DialogRecordDebtorComponent);
     } else {
-      this.dialogCreditor.open(DialogRecordCreditorComponent);
+      this.dialog.open(DialogRecordCreditorComponent);
     }
+  }
+
+  openDialogPayment() {
+    this.dialog.open(DialogPaymentAllDebtorComponent);
   }
   
   transfer() {
