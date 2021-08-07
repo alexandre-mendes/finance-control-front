@@ -45,6 +45,7 @@ import { TableRecordCreditorComponent } from './views/record/table-record-credit
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
+import { DialogPaymentAllDebtorComponent } from './views/record/dialog-payment-all-debtor/dialog-payment-all-debtor.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -71,6 +72,7 @@ const maskConfig: Partial<IConfig> = {
     TableRecordDebtorComponent,
     TableRecordCreditorComponent,
     DialogConfirmComponent,
+    DialogPaymentAllDebtorComponent,
   ],
   imports: [
     FormsModule,
