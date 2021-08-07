@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable } from 'rxjs';
+import { Exception } from './exception.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,8 @@ export class MessageService {
     })
   }
 
-  errorHandler(e: any): Observable<any> {
-    this.showMessage("Ocorreu um erro!", true)
+  errorHandler(e: HttpErrorResponse): Observable<any> {
+    this.showMessage(e.error.message, true)
     return EMPTY;
   }
 }

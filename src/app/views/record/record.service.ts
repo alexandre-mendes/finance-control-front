@@ -74,7 +74,6 @@ export class RecordService {
   }
 
   payAll(uuidWalletCreditor: string, uuidWalletDebtor: string): Observable<void> {
-    console.log("AQUIIIII", uuidWalletDebtor)
     return this.http.post<void>(`${environment.api}/transactions/pay-all`, 
     {uuidWalletDebtor, uuidWalletCreditor, month: this.monthSelected, year: this.yearSelected}).pipe(
       map(obj => 
