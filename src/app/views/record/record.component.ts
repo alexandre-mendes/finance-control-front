@@ -65,6 +65,9 @@ export class RecordComponent implements OnInit {
   listAll() {
     this.recordService.monthSelected = this.monthSelected.value;
     this.recordService.yearSelected = this.yearSelected;
+    this.walletService.findWalletsSummary(this.monthSelected.value, this.yearSelected).subscribe(res => {
+      this.totalCreditor = res.totalCreditor;
+    })
 
     if(this.wallet.typeWallet === "DEBTOR") {
       this.listAllDebtor();
@@ -85,8 +88,6 @@ export class RecordComponent implements OnInit {
   listAllCreditor() {
     this.recordService.listAllCreditor(this.wallet.uuid).subscribe(page => {
       this.records = page.content;
-      this.totalCreditor = this.records.length > 0 ? this.records.map(record => record.value)
-        .reduce((acumulator, currentValue) => (acumulator != undefined ? acumulator : 0) + (currentValue != undefined ? currentValue : 0)) : 0;
     })
   } 
 
