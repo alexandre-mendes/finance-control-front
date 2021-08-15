@@ -8,6 +8,7 @@ import { MessageService } from 'src/app/shared/message.service';
 import { Page } from 'src/app/shared/page.model';
 import { WalletSummary } from './wallet-summary.model';
 import { Month } from 'src/app/shared/month.model';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
