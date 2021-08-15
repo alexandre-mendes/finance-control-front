@@ -1,3 +1,5 @@
+import { Wallet } from "../wallet/wallet.model";
+
 export interface RecordDebtor {
     uuid?: string;
     registrationCode?: string;
@@ -6,5 +8,5 @@ export interface RecordDebtor {
     paid?: boolean;
     value?: number;
     installments?: number;
-    walletUuid?: string;
+    wallet?: Wallet;
 }

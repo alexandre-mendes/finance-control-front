@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'src/app/shared/message.service';
 import { RecordDebtor } from './record-debtor.model';
 import { Page } from 'src/app/shared/page.model';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,10 @@ export class RecordService {
   }
 
   createRecordDebtor(record: RecordDebtor): Observable<RecordDebtor> {
-    record.walletUuid = this.wallet.uuid;
+    record.wallet = this.wallet;
+
+    console.log("DEBUG", this.wallet)
+
     return this.http.post<RecordDebtor>(`${environment.api}/records-debtor`, record).pipe(
       map(obj => 
         { this.updateRecords.emit(obj.title); 
@@ -41,7 +45,7 @@ export class RecordService {
   }
 
   createRecordCreditor(record: RecordCreditor): Observable<RecordCreditor> {
-    record.walletUuid = this.wallet.uuid;
+    record.wallet = this.wallet;
     return this.http.post<RecordCreditor>(`${environment.api}/records-creditor`, record).pipe(
       map(obj => 
         { this.updateRecords.emit(obj.title); 
@@ -51,14 +55,20 @@ export class RecordService {
   }
 
   listAllDebtor(uuidWallet?: string): Observable<Page<RecordDebtor>> {
-    return this.http.get<Page<RecordDebtor>>(`${environment.api}/records-debtor/wallets/${uuidWallet}/months/${this.monthSelected}/years/${this.yearSelected}`).pipe(
+    let firstDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected - 1, 1));
+    let lastDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected, 0));
+
+    return this.http.get<Page<RecordDebtor>>(`${environment.api}/records-debtor?uuid-wallet=${uuidWallet}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
   listAllCreditor(uuidWallet?: string): Observable<Page<RecordCreditor>> {
-    return this.http.get<Page<RecordCreditor>>(`${environment.api}/records-creditor/wallets/${uuidWallet}/months/${this.monthSelected}/years/${this.yearSelected}`).pipe(
+    let firstDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected - 1, 1));
+    let lastDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected, 0));
+
+    return this.http.get<Page<RecordCreditor>>(`${environment.api}/records-creditor?uuid-wallet=${uuidWallet}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -101,7 +111,7 @@ export class RecordService {
   }
 
   deleteDebtor(registrationCode: string): Observable<void> {
-    return this.http.delete<void>(`${environment.api}/records-debtor/${registrationCode}`).pipe(
+    return this.http.delete<void>(`${environment.api}/records-debtor/registration-code/${registrationCode}`).pipe(
       map(obj => { this.updateRecords.emit(""); return obj; }),
       catchError(e => this.messageService.errorHandler(e))
     )
@@ -126,5 +136,9 @@ export class RecordService {
       map(res => res),
       catchError(e => this.messageService.errorHandler(e))
     )
+  }
+
+  getDateFormated(date: Date): string {
+    return moment(date).format('YYYY-MM-DD');
   }
 }

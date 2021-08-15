@@ -31,14 +31,20 @@ export class WalletService {
   }
 
   listAll(month: number, year: number): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallets/months/${month}/years/${year}`).pipe(
+    let firstDate = this.getDateFormated(new Date(year, month - 1, 1));
+    let lastDate = this.getDateFormated(new Date(year, month, 0));
+
+    return this.http.get<Wallet[]>(`${environment.api}/wallets?firstDate=${firstDate}&lastDate=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
   listAllCreditor(month: number, year: number): Observable<Page<Wallet>> {
-    return this.http.get<Wallet[]>(`${environment.api}/wallets/months/${month}/years/${year}?typeWallet=CREDITOR`).pipe(
+    let firstDate = this.getDateFormated(new Date(year, month - 1, 1));
+    let lastDate = this.getDateFormated(new Date(year, month, 0));
+
+    return this.http.get<Wallet[]>(`${environment.api}/wallets?firstDate=${firstDate}&lastDate=${lastDate}&type-wallet=CREDITOR`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -70,5 +76,9 @@ export class WalletService {
       map(res => res),
       catchError(e => this.messageService.errorHandler(e))
     )
+  }
+
+  getDateFormated(date: Date): string {
+    return moment(date).format('YYYY-MM-DD');
   }
 }

@@ -28,7 +28,7 @@ export class AccountService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.api}/user`, user).pipe(
+    return this.http.post<User>(`${environment.api}/users`, user).pipe(
       map(obj => {
         this.loadingEvent.emit(true);
         return obj
@@ -41,7 +41,7 @@ export class AccountService {
   }
 
   userActivation(user: User): Observable<void> {
-    return this.http.post<void>(`${environment.api}/user/activation`, user).pipe(
+    return this.http.post<void>(`${environment.api}/users/activation`, user).pipe(
       map(obj => {
         this.loadingEvent.emit(true);
         return obj;

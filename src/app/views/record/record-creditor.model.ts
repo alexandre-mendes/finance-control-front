@@ -1,5 +1,7 @@
+import { Wallet } from "../wallet/wallet.model";
+
 export interface RecordCreditor {
-    walletUuid?: string;
+    wallet?: Wallet;
     title?: string;
     dateTransaction?: Date;
     value?: number;
