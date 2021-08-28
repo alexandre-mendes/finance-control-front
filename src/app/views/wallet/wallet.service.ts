@@ -35,7 +35,7 @@ export class WalletService {
     let firstDate = this.getDateFormated(new Date(year, month - 1, 1));
     let lastDate = this.getDateFormated(new Date(year, month, 0));
 
-    return this.http.get<Wallet[]>(`${environment.api}/wallets?firstDate=${firstDate}&lastDate=${lastDate}`).pipe(
+    return this.http.get<Wallet[]>(`${environment.api}/wallets?first-date=${firstDate}&last-date=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
@@ -45,7 +45,7 @@ export class WalletService {
     let firstDate = this.getDateFormated(new Date(year, month - 1, 1));
     let lastDate = this.getDateFormated(new Date(year, month, 0));
 
-    return this.http.get<Wallet[]>(`${environment.api}/wallets?firstDate=${firstDate}&lastDate=${lastDate}&type-wallet=CREDITOR`).pipe(
+    return this.http.get<Wallet[]>(`${environment.api}/wallets?first-date=${firstDate}&last-date=${lastDate}&type-wallet=CREDITOR`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
