@@ -1,11 +1,11 @@
-import { Wallet } from './../../wallet/wallet.model';
-import { RecordDebtor } from './../record-debtor.model';
+import { Wallet } from '../../../model/wallet.model';
+import { RecordDebtor } from './../../../model/record-debtor.model';
 import { DialogPaymentDebtorComponent } from './../dialog-payment-debtor/dialog-payment-debtor.component';
-import { RecordService } from './../record.service';
+import { RecordService } from '../../../service/record.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { WalletService } from '../../wallet/wallet.service';
-import { MessageService } from 'src/app/shared/message.service';
+import { WalletService } from '../../../service/wallet.service';
+import { MessageService } from '../../../service/message.service';
 import { DialogConfirmComponent } from 'src/app/shared/dialog-confirm/dialog-confirm.component';
 
 @Component({

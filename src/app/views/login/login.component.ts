@@ -1,7 +1,7 @@
-import { MessageService } from './../../shared/message.service';
+import { MessageService } from '../../service/message.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/shared/account.service';
+import { AccountService } from '../../service/account.service';
 
 @Component({
   selector: 'app-login',

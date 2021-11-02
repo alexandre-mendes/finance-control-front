@@ -1,5 +1,5 @@
-import { AccountService } from 'src/app/shared/account.service';
-import { MessageService } from './../../shared/message.service';
+import { AccountService } from './../../service/account.service';
+import { MessageService } from './../../service/message.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

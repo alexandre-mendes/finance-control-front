@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable } from 'rxjs';
-import { Exception } from './exception.model';
+import { Exception } from '../model/exception.model';
 
 @Injectable({
   providedIn: 'root'

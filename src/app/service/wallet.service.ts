@@ -1,13 +1,13 @@
-import { Wallet } from './wallet.model';
+import { Wallet } from '../model/wallet.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'src/app/shared/message.service';
-import { Page } from 'src/app/shared/page.model';
-import { WalletSummary } from './wallet-summary.model';
-import { Month } from 'src/app/shared/month.model';
+import { MessageService } from '../service/message.service';
+import { Page } from '../model/page.model';
+import { WalletSummary } from '../model/wallet-summary.model';
+import { Month } from '../model/month.model';
 import * as moment from 'moment';
 
 @Injectable({

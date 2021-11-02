@@ -1,4 +1,4 @@
-import { Wallet } from "../wallet/wallet.model";
+import { Wallet } from "./wallet.model";
 
 export interface RecordDebtor {
     uuid?: string;

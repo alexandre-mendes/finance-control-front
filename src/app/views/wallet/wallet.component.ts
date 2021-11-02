@@ -1,10 +1,10 @@
-import { Month } from './../../shared/month.model';
-import { WalletSummary } from './wallet-summary.model';
+import { Month } from './../../model/month.model';
+import { WalletSummary } from '../../model/wallet-summary.model';
 import { Component, OnInit } from '@angular/core';
 import { DialogWalletComponent } from './dialog-wallet/dialog-wallet.component';
 import {MatDialog} from '@angular/material/dialog';
-import { WalletService } from './wallet.service';
-import { Wallet } from './wallet.model';
+import { WalletService } from '../../service/wallet.service';
+import { Wallet } from '../../model/wallet.model';
 import { Router } from '@angular/router';
 
 @Component({

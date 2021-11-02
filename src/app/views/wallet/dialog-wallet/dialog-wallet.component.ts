@@ -1,8 +1,8 @@
-import { MessageService } from './../../../shared/message.service';
-import { WalletService } from './../wallet.service';
+import { MessageService } from '../../../service/message.service';
+import { WalletService } from '../../../service/wallet.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Wallet } from '../wallet.model';
+import { Wallet } from '../../../model/wallet.model';
 
 interface Type {
   value: string;

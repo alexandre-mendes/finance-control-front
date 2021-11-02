@@ -1,10 +1,10 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MessageService } from 'src/app/shared/message.service';
-import { Wallet } from '../../wallet/wallet.model';
-import { WalletService } from '../../wallet/wallet.service';
-import { RecordService } from '../record.service';
+import { MessageService } from '../../../service/message.service';
+import { Wallet } from '../../../model/wallet.model';
+import { WalletService } from '../../../service/wallet.service';
+import { RecordService } from '../../../service/record.service';
 
 @Component({
   selector: 'app-dialog-payment-all-debtor',

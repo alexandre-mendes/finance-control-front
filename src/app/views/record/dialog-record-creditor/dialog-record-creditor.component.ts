@@ -1,11 +1,11 @@
-import { WalletService } from './../../wallet/wallet.service';
-import { Wallet } from './../../wallet/wallet.model';
-import { RecordCreditor } from './../record-creditor.model';
+import { WalletService } from '../../../service/wallet.service';
+import { Wallet } from '../../../model/wallet.model';
+import { RecordCreditor } from '../../../model/record-creditor.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'src/app/shared/message.service';
-import { RecordService } from '../record.service';
+import { MessageService } from '../../../service/message.service';
+import { RecordService } from '../../../service/record.service';
 
 @Component({
   selector: 'app-dialog-record-creditor',

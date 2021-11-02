@@ -1,14 +1,14 @@
 import { DialogTransferCreditorComponent } from './dialog-transfer-creditor/dialog-transfer-creditor.component';
 import { DialogRecordCreditorComponent } from './dialog-record-creditor/dialog-record-creditor.component';
-import { Wallet } from './../wallet/wallet.model';
-import { RecordService } from './record.service';
+import { Wallet } from '../../model/wallet.model';
+import { RecordService } from '../../service/record.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs/tab-group';
-import { WalletService } from '../wallet/wallet.service';
+import { WalletService } from '../../service/wallet.service';
 import { DialogRecordDebtorComponent } from './dialog-record-debtor/dialog-record-debtor.component';
-import { Month } from 'src/app/shared/month.model';
+import { Month } from '../../model/month.model';
 import { DialogPaymentAllDebtorComponent } from './dialog-payment-all-debtor/dialog-payment-all-debtor.component';
 
 @Component({

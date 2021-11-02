@@ -5,7 +5,7 @@ import jwt_decode, { JwtPayload } from 'jwt-decode'
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from './user.model';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'

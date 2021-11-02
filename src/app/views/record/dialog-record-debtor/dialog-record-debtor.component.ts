@@ -1,10 +1,10 @@
-import { WalletService } from './../../wallet/wallet.service';
+import { WalletService } from '../../../service/wallet.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'src/app/shared/message.service';
-import { RecordDebtor } from '../record-debtor.model';
-import { RecordService } from '../record.service';
+import { MessageService } from '../../../service/message.service';
+import { RecordDebtor } from '../../../model/record-debtor.model';
+import { RecordService } from '../../../service/record.service';
 
 @Component({
   selector: 'app-dialog-record-debtor',

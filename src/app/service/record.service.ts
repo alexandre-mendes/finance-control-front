@@ -1,13 +1,13 @@
-import { Wallet } from './../wallet/wallet.model';
-import { RecordCreditor } from './record-creditor.model';
+import { Wallet } from '../model/wallet.model';
+import { RecordCreditor } from '../model/record-creditor.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'src/app/shared/message.service';
-import { RecordDebtor } from './record-debtor.model';
-import { Page } from 'src/app/shared/page.model';
+import { MessageService } from '../service/message.service';
+import { RecordDebtor } from '../model/record-debtor.model';
+import { Page } from '../model/page.model';
 import * as moment from 'moment';
 
 @Injectable({
