@@ -17,10 +17,10 @@ export class AccountService {
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
 
-  async login(user: any) {
+  async login(user: {"username": string, "password": string}) {
     this.loadingEvent.emit(true);
-    const result = await this.http.post<any>(`${environment.api}/login`, JSON.stringify(user)).toPromise();
-    let token = JSON.parse(JSON.stringify(result)).Authorization.split(" ")[1];
+    const result = await this.http.post<any>(`${environment.api}/auth`, user).toPromise();
+    let token = result.token;
 
     window.localStorage.setItem('token', token);
     this.loadingEvent.emit(false);
