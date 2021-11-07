@@ -2,6 +2,7 @@ import { MessageService } from '../../service/message.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../../service/account.service';
+import { Login } from 'src/app/model/login.model';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AccountService } from '../../service/account.service';
 })
 export class LoginComponent implements OnInit {
 
-  login = {
+  login: Login = {
     "username": "",
     "password": ""
   }

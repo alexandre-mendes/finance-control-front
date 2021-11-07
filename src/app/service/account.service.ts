@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../model/user.model';
+import { Login } from '../model/login.model';
+import { Token } from '../model/token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,9 @@ export class AccountService {
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
 
-  async login(user: {"username": string, "password": string}) {
+  async login(user: Login) {
     this.loadingEvent.emit(true);
-    const result = await this.http.post<any>(`${environment.api}/auth`, user).toPromise();
+    const result = await this.http.post<Token>(`${environment.api}/auth`, user).toPromise();
     let token = result.token;
 
     window.localStorage.setItem('token', token);

@@ -52,7 +52,7 @@ export class WalletService {
   }
 
   findWalletsSummary(month: number, year: number): Observable<WalletSummary> {
-    return this.http.get<WalletSummary>(`${environment.api}/wallets/summarys/months/${month}/years/${year}`).pipe(
+    return this.http.get<WalletSummary>(`${environment.api}/wallets/summary?month=${month}&year=${year}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     )
