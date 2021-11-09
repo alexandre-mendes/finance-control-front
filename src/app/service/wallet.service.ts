@@ -31,6 +31,16 @@ export class WalletService {
     );
   }
 
+  delete(uuid: string): Observable<void> {
+    return this.http.delete<void>(`${environment.api}/wallets/${uuid}`).pipe(
+      map(obj => {
+        this.issueWalletCreated.emit("");
+        return obj;
+      }),
+      catchError(e => this.messageService.errorHandler(e))
+    );
+  }
+
   listAll(month: number, year: number): Observable<Page<Wallet>> {
     let firstDate = this.getDateFormated(new Date(year, month - 1, 1));
     let lastDate = this.getDateFormated(new Date(year, month, 0));

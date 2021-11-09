@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { WalletService } from '../../service/wallet.service';
 import { Wallet } from '../../model/wallet.model';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-wallet',
@@ -37,6 +38,7 @@ export class WalletComponent implements OnInit {
 
   constructor(public dialog: MatDialog, 
     private walletService: WalletService,
+    private messageService: MessageService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -76,6 +78,13 @@ export class WalletComponent implements OnInit {
   reloadWallets() {
     this.findWalletsSummary();
     this.listAll();
+  }
+
+  delete(wallet: Wallet) {
+    const uuid = wallet.uuid == undefined ? "" : wallet.uuid;
+    this.walletService.delete(uuid).subscribe(response => {
+      this.messageService.showMessage("Deletado com sucesso!");
+    })
   }
 
   listAll() {
