@@ -34,8 +34,6 @@ export class RecordService {
   createRecordDebtor(record: RecordDebtor): Observable<RecordDebtor> {
     record.wallet = this.wallet;
 
-    console.log("DEBUG", this.wallet)
-
     return this.http.post<RecordDebtor>(`${environment.api}/records-debtor`, record).pipe(
       map(obj => 
         { this.updateRecords.emit(obj.title); 

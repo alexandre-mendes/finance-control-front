@@ -14,6 +14,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+        <mat-label>Tag</mat-label>
+        <mat-select [(value)]="record.tag" matInput required>
+          <mat-option [value]="tag" *ngFor="let tag of tags">{{ tag.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Vencimento</mat-label>
         <input [disabled]="dayWallet != undefined" matInput [matDatepicker]="picker" [(ngModel)]="record.dateDeadline" name="dateDeadline">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

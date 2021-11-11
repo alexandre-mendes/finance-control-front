@@ -1,3 +1,4 @@
+import { Tag } from "./tag.model";
 import { Wallet } from "./wallet.model";
 
 export interface RecordDebtor {
@@ -9,4 +10,5 @@ export interface RecordDebtor {
     value?: number;
     installments?: number;
     wallet?: Wallet;
+    tag?: Tag;
 }
