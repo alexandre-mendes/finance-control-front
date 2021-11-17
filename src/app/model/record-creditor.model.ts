@@ -5,6 +5,6 @@ export interface RecordCreditor {
     title?: string;
     dateTransaction?: Date;
     value?: number;
-    uuid?: string;
+    id?: string;
     received?: boolean;
 }

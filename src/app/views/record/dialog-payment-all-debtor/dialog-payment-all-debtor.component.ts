@@ -14,8 +14,8 @@ import { RecordService } from '../../../service/record.service';
 export class DialogPaymentAllDebtorComponent implements OnInit {
 
   wallets: Wallet[] = [];
-  uuidWalletCreditor: string = "";
-  uuidWalletDebtor: string = "";
+  walletCreditorId: string = "";
+  walletDebtorId: string = "";
 
   constructor(private walletService: WalletService,
     private recordService: RecordService,
@@ -23,7 +23,7 @@ export class DialogPaymentAllDebtorComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogPaymentAllDebtorComponent>) { }
 
   ngOnInit(): void {
-    this.uuidWalletDebtor = this.walletService.wallet.uuid != undefined ? this.walletService.wallet.uuid : "";
+    this.walletDebtorId = this.walletService.wallet.id != undefined ? this.walletService.wallet.id : "";
 
     this.walletService.listAllCreditor(this.recordService.monthSelected, this.recordService.yearSelected).subscribe(response => {
       this.wallets = response.content;
@@ -31,7 +31,7 @@ export class DialogPaymentAllDebtorComponent implements OnInit {
   }
 
   confirm() {
-    this.recordService.payAll(this.uuidWalletCreditor, this.uuidWalletDebtor).subscribe(res => {
+    this.recordService.payAll(this.walletCreditorId, this.walletDebtorId).subscribe(res => {
       this.messageService.showMessage("Pagamento efetuado com sucesso.")
         this.dialogRef.close();
     })

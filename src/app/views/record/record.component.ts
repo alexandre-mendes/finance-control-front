@@ -77,7 +77,7 @@ export class RecordComponent implements OnInit {
   }
 
   listAllDebtor() {
-    this.recordService.listAllDebtor(this.wallet.uuid).subscribe(page => {
+    this.recordService.listAllDebtor(this.wallet.id).subscribe(page => {
       this.records = page.content;
       this.totalDebtor = this.records.length > 0 ? this.records.filter(record => !record.paid)
         .map(record => record.value)
@@ -86,7 +86,7 @@ export class RecordComponent implements OnInit {
   } 
 
   listAllCreditor() {
-    this.recordService.listAllCreditor(this.wallet.uuid).subscribe(page => {
+    this.recordService.listAllCreditor(this.wallet.id).subscribe(page => {
       this.records = page.content;
     })
   } 

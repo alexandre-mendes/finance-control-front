@@ -2,7 +2,7 @@ import { Tag } from "./tag.model";
 import { Wallet } from "./wallet.model";
 
 export interface RecordDebtor {
-    uuid?: string;
+    id?: string;
     registrationCode?: string;
     title?: string;
     dateDeadline?: Date;

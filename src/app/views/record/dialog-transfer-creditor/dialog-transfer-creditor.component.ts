@@ -36,13 +36,13 @@ export class DialogTransferCreditorComponent implements OnInit {
   }
 
   confirm() {
-    if (this.walletOrigin.uuid != undefined 
+    if (this.walletOrigin.id != undefined 
       && this.walletOrigin.value != undefined
-      && this.walletDestiny.uuid != undefined 
+      && this.walletDestiny.id != undefined 
       && this.valueTransfer != undefined 
       && this.valueTransfer > 0) {
 
-      this.recordService.transfer(this.walletOrigin.uuid, this.walletDestiny.uuid, this.valueTransfer).subscribe(() => {
+      this.recordService.transfer(this.walletOrigin.id, this.walletDestiny.id, this.valueTransfer).subscribe(() => {
         this.messageService.showMessage("Transferência efetuada com sucesso.")
         this.dialogRef.close();
       })

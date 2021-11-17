@@ -1,4 +1,4 @@
 export interface Tag {
-    uuid?: string,
+    id?: string,
     title?: string
 }

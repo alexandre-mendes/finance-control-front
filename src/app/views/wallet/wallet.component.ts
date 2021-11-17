@@ -81,8 +81,8 @@ export class WalletComponent implements OnInit {
   }
 
   delete(wallet: Wallet) {
-    const uuid = wallet.uuid == undefined ? "" : wallet.uuid;
-    this.walletService.delete(uuid).subscribe(response => {
+    const id = wallet.id == undefined ? "" : wallet.id;
+    this.walletService.delete(id).subscribe(response => {
       this.messageService.showMessage("Deletado com sucesso!");
     })
   }

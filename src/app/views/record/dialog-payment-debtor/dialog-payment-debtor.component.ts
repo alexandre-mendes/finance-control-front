@@ -18,7 +18,7 @@ export class DialogPaymentDebtorComponent implements OnInit {
   wallets: Wallet[] = [];
   records: RecordCreditor[] = [];
   recordDebtor: RecordDebtor = {};
-  uuidWallet: string = "";
+  walletId: string = "";
 
   constructor(private route: ActivatedRoute,
     private walletService: WalletService,
@@ -35,8 +35,8 @@ export class DialogPaymentDebtorComponent implements OnInit {
   }
 
   confirm() {
-    if (this.recordDebtor.uuid != undefined) {
-      this.recordService.pay(this.recordDebtor.uuid, this.uuidWallet).subscribe(() => {
+    if (this.recordDebtor.id != undefined) {
+      this.recordService.pay(this.recordDebtor.id, this.walletId).subscribe(() => {
         this.messageService.showMessage("Pagamento efetuado com sucesso.")
         this.dialogRef.close();
       })

@@ -5,8 +5,8 @@
     <h4>Valor: {{recordDebtor.value | currency: 'BRL'}}</h4>
     <mat-form-field appearance="fill">
         <mat-label>Selecione uma Carteira</mat-label>
-        <mat-select [(value)]="uuidWallet" matInput required>
-          <mat-option [value]="option.uuid" *ngFor="let option of wallets">{{ option.title }}</mat-option>
+        <mat-select [(value)]="walletId" matInput required>
+          <mat-option [value]="option.id" *ngFor="let option of wallets">{{ option.title }}</mat-option>
         </mat-select>
     </mat-form-field>
 

@@ -52,28 +52,28 @@ export class RecordService {
     );
   }
 
-  listAllDebtor(uuidWallet?: string): Observable<Page<RecordDebtor>> {
+  listAllDebtor(walletId?: string): Observable<Page<RecordDebtor>> {
     let firstDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected - 1, 1));
     let lastDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected, 0));
 
-    return this.http.get<Page<RecordDebtor>>(`${environment.api}/records-debtor?uuid-wallet=${uuidWallet}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
+    return this.http.get<Page<RecordDebtor>>(`${environment.api}/records-debtor?wallet-id=${walletId}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
-  listAllCreditor(uuidWallet?: string): Observable<Page<RecordCreditor>> {
+  listAllCreditor(walletId?: string): Observable<Page<RecordCreditor>> {
     let firstDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected - 1, 1));
     let lastDate = this.getDateFormated(new Date(this.yearSelected, this.monthSelected, 0));
 
-    return this.http.get<Page<RecordCreditor>>(`${environment.api}/records-creditor?uuid-wallet=${uuidWallet}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
+    return this.http.get<Page<RecordCreditor>>(`${environment.api}/records-creditor?wallet-id=${walletId}&first-date=${firstDate}&last-date=${lastDate}`).pipe(
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e))
     );
   }
 
-  pay(uuidRecordDebtor: string, uuidWalletCreditor: string): Observable<void> {
-    return this.http.post<void>(`${environment.api}/transactions/pays`, {uuidRecordDebtor: uuidRecordDebtor, uuidWalletCreditor: uuidWalletCreditor}).pipe(
+  pay(recordDebtorId: string, walletCreditorId: string): Observable<void> {
+    return this.http.post<void>(`${environment.api}/transactions/pays`, {recordDebtorId: recordDebtorId, walletCreditorId: walletCreditorId}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
           return obj;                       }),
@@ -81,9 +81,9 @@ export class RecordService {
     )
   }
 
-  payAll(uuidWalletCreditor: string, uuidWalletDebtor: string): Observable<void> {
+  payAll(walletCreditorId: string, walletDebtorId: string): Observable<void> {
     return this.http.post<void>(`${environment.api}/transactions/pay-all`, 
-    {uuidWalletDebtor, uuidWalletCreditor, month: this.monthSelected, year: this.yearSelected}).pipe(
+    {walletDebtorId, walletCreditorId, month: this.monthSelected, year: this.yearSelected}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
           return obj;                       }),
@@ -91,9 +91,9 @@ export class RecordService {
     )
   }
 
-  transfer(uuidOrigin: string, uuidDestiny: string, valueTransfer: number): Observable<void> {
+  transfer(originId: string, destinyId: string, valueTransfer: number): Observable<void> {
     return this.http.post<void>(`${environment.api}/transactions/transfers`, 
-    {uuidOrigin: uuidOrigin, uuidDestiny: uuidDestiny, valueTransfer: valueTransfer}).pipe(
+    {originId: originId, destinyId: destinyId, valueTransfer: valueTransfer}).pipe(
       map(obj => 
         { this.updateRecords.emit("");
           return obj;                       }),
@@ -101,8 +101,8 @@ export class RecordService {
     )
   }
 
-  cancelCreditor(uuid: string): Observable<void> {
-    return this.http.post<void>(`${environment.api}/transactions/record-creditor/${uuid}/cancel`, {}).pipe(
+  cancelCreditor(idCreditor: string): Observable<void> {
+    return this.http.post<void>(`${environment.api}/transactions/record-creditor/${idCreditor}/cancel`, {}).pipe(
       map(obj => { this.updateRecords.emit(""); return obj; }),
       catchError(e => this.messageService.errorHandler(e))
     );

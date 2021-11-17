@@ -39,8 +39,8 @@ export class TableRecordCreditorComponent implements OnInit {
       }
     });
     confirmDialog.afterClosed().subscribe(result => {
-      if (result === true && record.uuid != undefined) {
-        this.recordService.cancelCreditor(record.uuid).subscribe(res => {
+      if (result === true && record.id != undefined) {
+        this.recordService.cancelCreditor(record.id).subscribe(res => {
           this.messageService.showMessage("Cancelamento realizado com sucesso.")
         })
       }

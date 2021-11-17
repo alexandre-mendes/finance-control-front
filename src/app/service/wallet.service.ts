@@ -31,8 +31,8 @@ export class WalletService {
     );
   }
 
-  delete(uuid: string): Observable<void> {
-    return this.http.delete<void>(`${environment.api}/wallets/${uuid}`).pipe(
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.api}/wallets/${id}`).pipe(
       map(obj => {
         this.issueWalletCreated.emit("");
         return obj;

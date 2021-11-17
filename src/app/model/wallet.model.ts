@@ -1,5 +1,5 @@
 export interface Wallet {
-    uuid?: string
+    id?: string
     title?: string
     typeWallet?: string
     dayWallet?: number;
