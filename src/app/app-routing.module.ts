@@ -7,6 +7,7 @@ import { CreateAccountComponent } from './views/create-account/create-account.co
 import { AuthGuard } from './shared/auth.guard';
 import { WalletComponent } from './views/wallet/wallet.component';
 import { RecordComponent } from './views/record/record.component';
+import { ConfigurationComponent } from './views/configuration/configuration.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: GenericHomeComponent,
     children: [
       { path: 'wallet', component: WalletComponent },
-      { path: 'wallet/record', component: RecordComponent }
+      { path: 'wallet/record', component: RecordComponent },
+      { path: 'configuration', component: ConfigurationComponent }
     ],
     canActivate: [AuthGuard]
   },

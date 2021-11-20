@@ -1,0 +1,24 @@
+<mat-card>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+        <mat-icon>sell</mat-icon>
+        Nova Tag
+    </button>
+</mat-card>
+<br>
+
+<div class="container">
+    <div class="row" *ngFor="let tag of tags">
+        <div class="col-10">
+            <mat-icon style="margin-right: 2px;">sell</mat-icon>
+            {{ tag.title }}
+        </div>
+        <div class="col-2">
+            <button mat-button color="primary" (click)="openEditDialog(tag)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button color="warn" (click)="delete(tag)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

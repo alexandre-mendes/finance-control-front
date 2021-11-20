@@ -46,6 +46,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
 import { DialogPaymentAllDebtorComponent } from './views/record/dialog-payment-all-debtor/dialog-payment-all-debtor.component';
+import { ConfigurationComponent } from './views/configuration/configuration.component';
+import { TagComponent } from './views/configuration/tag/tag.component';
+import { DialogTagComponent } from './views/configuration/tag/dialog-tag/dialog-tag.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -73,6 +76,9 @@ const maskConfig: Partial<IConfig> = {
     TableRecordCreditorComponent,
     DialogConfirmComponent,
     DialogPaymentAllDebtorComponent,
+    ConfigurationComponent,
+    TagComponent,
+    DialogTagComponent
   ],
   imports: [
     FormsModule,
@@ -101,6 +107,7 @@ const maskConfig: Partial<IConfig> = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
     NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [
