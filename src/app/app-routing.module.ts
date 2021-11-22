@@ -7,7 +7,9 @@ import { CreateAccountComponent } from './views/create-account/create-account.co
 import { AuthGuard } from './shared/auth.guard';
 import { WalletComponent } from './views/wallet/wallet.component';
 import { RecordComponent } from './views/record/record.component';
-import { ConfigurationComponent } from './views/configuration/configuration.component';
+import { TagComponent } from './views/tag/tag.component';
+import { DebitTransactionsComponent } from './views/debit-transactions/debit-transactions.component';
+import { CreditTransactiosComponent } from './views/credit-transactions/credit-transactions.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,9 @@ const routes: Routes = [
     children: [
       { path: 'wallet', component: WalletComponent },
       { path: 'wallet/record', component: RecordComponent },
-      { path: 'configuration', component: ConfigurationComponent }
+      { path: 'tag', component: TagComponent },
+      { path: 'debit-transactions', component: DebitTransactionsComponent },
+      { path: 'credit-transactions', component: CreditTransactiosComponent}
     ],
     canActivate: [AuthGuard]
   },

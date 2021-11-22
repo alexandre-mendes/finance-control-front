@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTreeModule} from '@angular/material/tree';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -21,9 +22,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { GenericHomeComponent } from './views/generic-home/generic-home.component';
 import { GenericLoginComponent } from './views/generic-login/generic-login.component';
-import { FooterComponent } from './views/generic-home/footer/footer.component';
-import { HeaderComponent } from './views/generic-home/header/header.component';
-import { NavComponent } from './views/generic-home/nav/nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { WalletComponent } from './views/wallet/wallet.component';
 import { DialogWalletComponent } from './views/wallet/dialog-wallet/dialog-wallet.component';
@@ -46,9 +44,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
 import { DialogPaymentAllDebtorComponent } from './views/record/dialog-payment-all-debtor/dialog-payment-all-debtor.component';
-import { ConfigurationComponent } from './views/configuration/configuration.component';
-import { TagComponent } from './views/configuration/tag/tag.component';
-import { DialogTagComponent } from './views/configuration/tag/dialog-tag/dialog-tag.component';
+import { TagComponent } from './views/tag/tag.component';
+import { DialogTagComponent } from './views/tag/dialog-tag/dialog-tag.component';
+import { MenuComponent } from './views/generic-home/menu/menu.component';
+import { DebitTransactionsComponent } from './views/debit-transactions/debit-transactions.component';
+import { CreditTransactiosComponent } from './views/credit-transactions/credit-transactions.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -62,9 +62,6 @@ const maskConfig: Partial<IConfig> = {
     CreateAccountComponent,
     GenericHomeComponent,
     GenericLoginComponent,
-    FooterComponent,
-    HeaderComponent,
-    NavComponent,
     WalletComponent,
     DialogWalletComponent,
     RecordComponent,
@@ -76,9 +73,11 @@ const maskConfig: Partial<IConfig> = {
     TableRecordCreditorComponent,
     DialogConfirmComponent,
     DialogPaymentAllDebtorComponent,
-    ConfigurationComponent,
     TagComponent,
-    DialogTagComponent
+    DialogTagComponent,
+    MenuComponent,
+    DebitTransactionsComponent,
+    CreditTransactiosComponent
   ],
   imports: [
     FormsModule,
@@ -108,6 +107,7 @@ const maskConfig: Partial<IConfig> = {
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatTreeModule,
     NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [

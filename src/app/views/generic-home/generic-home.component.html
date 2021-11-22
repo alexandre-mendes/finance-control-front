@@ -1,3 +1,23 @@
-<app-header></app-header>
-<app-nav></app-nav>
-<!-- <app-footer></app-footer> -->
+<p class="mat-elevation-z6">
+    <mat-toolbar color="primary">
+      <button (click)="drawer.toggle()" mat-icon-button class="example-icon">
+        <mat-icon>table_rows</mat-icon>
+      </button>
+      <h1 style="margin-left: 2px;">Finance Control</h1>
+      <span class="example-spacer"></span>
+
+      <button mat-raised-button mat-icon-button class="example-icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>
+
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer style="width: 300px;" #drawer mode="side">
+      <app-menu></app-menu>
+    </mat-drawer>
+  
+    <div>
+      <router-outlet></router-outlet>
+    </div>  
+</mat-drawer-container>

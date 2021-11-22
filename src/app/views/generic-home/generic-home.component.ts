@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-generic-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenericHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    window.localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
+
+  home() {
+    this.router.navigate(['wallet'])
+  }
 }
