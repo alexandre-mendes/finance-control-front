@@ -49,4 +49,10 @@ export class RecordCreditorService {
       map(obj => obj),
       catchError(e => this.messageService.errorHandler(e)));
   }
+
+  findTotal(params: HttpParams): Observable<number> {
+    return this.http.get<number>(`${environment.api}/records-creditor/total`, {params}).pipe(
+      map(response => response),
+      catchError(e => this.messageService.errorHandler(e)));
+  }
 }

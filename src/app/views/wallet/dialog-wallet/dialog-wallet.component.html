@@ -1,18 +1,18 @@
 <h2 mat-dialog-title>Adicionar Carteira</h2>
-<mat-dialog-content class="mat-typography">    
+<mat-dialog-content class="mat-typography">
   <form  #form="ngForm">
     <mat-form-field>
         <input matInput placeholder="Titulo" [(ngModel)]="wallet.title" name="title" required>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Tipo Carteira</mat-label>
       <mat-select [(value)]="wallet.typeWallet" matInput required>
         <mat-option [value]="option.value" *ngFor="let option of types">{{ option.viewValue }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Dia da Carteira</mat-label>
       <mat-select [(value)]="wallet.dayWallet" matInput required>
         <mat-option [value]="option" *ngFor="let option of dias">{{ option }}</mat-option>

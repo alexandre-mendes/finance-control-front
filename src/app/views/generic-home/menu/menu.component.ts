@@ -1,7 +1,7 @@
-import { FlatTreeControl } from "@angular/cdk/tree";
-import { Component, OnInit } from "@angular/core";
-import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
-import { Router } from "@angular/router";
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, OnInit } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Router } from '@angular/router';
 
 
 interface Node {
@@ -9,12 +9,12 @@ interface Node {
     route?: string;
     children?: Node[];
 }
-  
+
 const TREE_DATA: Node[] = [
     {
       name: 'Configurações',
       children: [
-          {name: 'Conta'}, 
+          {name: 'Conta'},
           {name: 'Tag', route: 'tag'},
           {name: 'Carteira', route: 'wallet'}
         ],
@@ -23,21 +23,21 @@ const TREE_DATA: Node[] = [
       name: 'Financeiro',
       children: [
         {
-          name: 'Movimentações de Crédito',
+          name: 'Entradas',
           route: 'credit-transactions'
         },
         {
-          name: 'Movimentações de Débito',
+          name: 'Saídas',
           route: 'debit-transactions'
         },
       ],
     },
     {
         name: 'Dashboard',
-        children: [{name: "..."}]
+        children: [{name: '...'}]
     }
 ];
-  
+
 interface ExampleFlatNode {
     expandable: boolean;
     name: string;
@@ -51,14 +51,34 @@ interface ExampleFlatNode {
     templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {
-    
+
     constructor(private router: Router) {
         this.dataSource.data = TREE_DATA;
     }
 
+    treeControl = new FlatTreeControl<ExampleFlatNode>(
+        node => node.level,
+        node => node.expandable,
+    );
+
+  treeFlattener = new MatTreeFlattener(
+    (node: Node, level: number) => {
+      return {
+        expandable: !!node.children && node.children.length > 0,
+        name: node.name,
+        level
+      };
+    },
+      node => node.level,
+        node => node.expandable,
+        node => node.children,
+  );
+
+    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
     ngOnInit(): void {}
 
-    navigate(name: string) {
+    navigate(name: string): void {
         const node = this.filterByName(name);
         if (node !== undefined && node.route !== undefined) {
             this.router.navigate([node.route]);
@@ -70,37 +90,15 @@ export class MenuComponent implements OnInit {
     }
 
     findNodes(list: Node[]): Array<Node> {
-        let listReturn: Node[] = []
+        const listReturn: Node[] = [];
         list.forEach(node => {
             listReturn.push(node);
             if (node.children !== undefined) {
                 listReturn.push(...this.findNodes(node.children));
-            } 
-        })
-        return listReturn;        
+            }
+        });
+        return listReturn;
     }
 
-    private _transformer = (node: Node, level: number) => {
-        return {
-          expandable: !!node.children && node.children.length > 0,
-          name: node.name,
-          level: level
-        };
-    };
-    
-    treeControl = new FlatTreeControl<ExampleFlatNode>(
-        node => node.level,
-        node => node.expandable,
-    );
-    
-    treeFlattener = new MatTreeFlattener(
-        this._transformer,
-        node => node.level,
-        node => node.expandable,
-        node => node.children,
-    );
-    
-    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 }

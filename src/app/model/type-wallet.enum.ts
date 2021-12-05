@@ -1,4 +1,4 @@
 export enum TypeWallet {
-    CREDITOR = 'CREDITOR',
-    DEBTOR = 'DEBTOR'
+    ACTIVE = 'ACTIVE',
+    PASSIVE = 'PASSIVE'
 }

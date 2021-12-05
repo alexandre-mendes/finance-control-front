@@ -53,6 +53,7 @@ export class CreditTransactiosComponent implements OnInit {
   wallet: Wallet = {};
   year = 0;
   month = 0;
+  total = 0;
 
   constructor(public dialog: MatDialog,
               private messageService: MessageService,
@@ -63,10 +64,11 @@ export class CreditTransactiosComponent implements OnInit {
     const date = new Date();
     this.year = date.getFullYear();
     this.month = date.getMonth() + 1;
+    this.findTotal();
     this.listAll();
     this.listAllWallets();
     this.recordCreditorService.listRecordsEvent.subscribe(() => {
-      this.listAll();
+      this.filter();
     });
   }
 
@@ -88,6 +90,21 @@ export class CreditTransactiosComponent implements OnInit {
     }
   }
 
+  filter(): void {
+    this.listAll();
+    this.findTotal();
+  }
+
+  findTotal(): void {
+    let params = new HttpParams();
+    if (this.wallet.id !== undefined) {
+      params = params.append('wallet-id', this.wallet?.id || '');
+    }
+    this.recordCreditorService.findTotal(params).subscribe(response => {
+      this.total = response;
+    });
+  }
+
   listAll(): void {
     let params = new HttpParams();
     if (this.wallet.id !== undefined) {
@@ -106,7 +123,7 @@ export class CreditTransactiosComponent implements OnInit {
 
   private listAllWallets(): void {
     let params = new HttpParams();
-    params = params.append('type-wallet', TypeWallet.CREDITOR);
+    params = params.append('type-wallet', TypeWallet.ACTIVE);
     params = params.append('size', '100');
     params = params.append('page', '0');
     this.walletService.listAll(params).subscribe(response => {

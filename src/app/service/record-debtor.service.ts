@@ -59,4 +59,10 @@ export class RecordDebtorService {
       catchError(e => this.messageService.errorHandler(e))
     );
   }
+
+  findTotal(params: HttpParams): Observable<number> {
+    return this.http.get<number>(`${environment.api}/records-debtor/total`, {params}).pipe(
+      map(response => response),
+      catchError(e => this.messageService.errorHandler(e)));
+  }
 }

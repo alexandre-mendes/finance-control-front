@@ -32,7 +32,7 @@ export class DialogCreditTransferComponent implements OnInit {
 
   private listAllWallets(): void {
     let params = new HttpParams();
-    params = params.append('type-wallet', TypeWallet.CREDITOR);
+    params = params.append('type-wallet', TypeWallet.ACTIVE);
     params = params.append('size', '100');
     params = params.append('page', '0');
     this.walletService.listAll(params).subscribe(response => {

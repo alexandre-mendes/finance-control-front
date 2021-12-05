@@ -50,14 +50,11 @@ export class DebitTransactionsComponent implements OnInit {
   ];
 
   wallets: Wallet[] = [];
-
   debtors: {value?: number, paid?: boolean}[] = [{value: 100, paid: false}];
-
   year = 2020;
-
   month: MonthEnum = MonthEnum.JANUARY;
-
   wallet?: Wallet;
+  total = 0;
 
   constructor(
     public dialog: MatDialog,
@@ -69,12 +66,11 @@ export class DebitTransactionsComponent implements OnInit {
     const date = new Date();
     this.month = date.getMonth() + 1;
     this.year = date.getFullYear();
-
     this.listAllWallets();
-    this.listAll();
+    this.filter();
 
     this.service.listRecordsEvent.subscribe(() => {
-      this.listAll();
+      this.filter();
     });
   }
 
@@ -89,6 +85,23 @@ export class DebitTransactionsComponent implements OnInit {
       const dialog = this.dialog.open(DialogDebitPaymentAllComponent);
       dialog.componentInstance.paymentAll = {walletDebtorId: this.wallet?.id, year: this.year, month: this.month};
     }
+  }
+
+  filter(): void {
+    this.listAll();
+    this.findTotal();
+  }
+
+  findTotal(): void {
+    let params = new HttpParams();
+    if (this.wallet?.id !== undefined) {
+      params = params.append('wallet-id', this.wallet?.id || '');
+    }
+    params = params.append('month', this.month.toString());
+    params = params.append('year', this.year.toString());
+    this.service.findTotal(params).subscribe(response => {
+      this.total = response;
+    });
   }
 
   listAll(): void {
@@ -110,7 +123,7 @@ export class DebitTransactionsComponent implements OnInit {
 
   listAllWallets(): void {
     let params = new HttpParams();
-    params = params.append('type-wallet', TypeWallet.DEBTOR);
+    params = params.append('type-wallet', TypeWallet.PASSIVE);
     params = params.append('size', '100');
     params = params.append('page', '0');
     this.walletService.listAll(params).subscribe(response => {
