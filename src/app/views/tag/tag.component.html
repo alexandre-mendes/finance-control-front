@@ -1,4 +1,5 @@
 <mat-card>
+    <h1>Tags</h1>
     <button mat-raised-button color="primary" (click)="openDialog()">
         <mat-icon>sell</mat-icon>
         Nova Tag
@@ -7,18 +8,26 @@
 <br>
 
 <div class="container">
+    <div class="row">
+        <h3 class="col-10">Titulo</h3>
+        <h3 class="col-2">Ações</h3>
+    </div>
     <div class="row" *ngFor="let tag of tags">
         <div class="col-10">
-            <mat-icon style="margin-right: 2px;">sell</mat-icon>
             {{ tag.title }}
         </div>
         <div class="col-2">
             <button mat-button color="primary" (click)="openEditDialog(tag)">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-button color="warn" (click)="delete(tag)">
+            <button mat-button color="primary" (click)="delete(tag)">
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
     </div>
 </div>
+<mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageNumber"
+                (page)="pageChangeEvent($event)">
+</mat-paginator>

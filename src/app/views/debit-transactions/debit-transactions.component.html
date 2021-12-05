@@ -1,0 +1,44 @@
+<mat-card>
+  <h1>Movimentações de Débito</h1>
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    <mat-icon>shopping_bag</mat-icon>
+    Nova Compra
+  </button>
+  <button mat-raised-button color="primary" style="margin-left: 2px;" (click)="openDialogPayment()">
+    <mat-icon>payment</mat-icon>
+    Pagar Tudo
+  </button>
+
+  <div style="display: flex; float: right;">
+    <mat-icon>filter_alt</mat-icon>
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Carteira</mat-label>
+      <mat-select [(value)]="wallet" matInput required>
+        <mat-option [value]="wallet" *ngFor="let wallet of wallets" (click)="listAll()">{{ wallet.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Mês</mat-label>
+      <mat-select [(value)]="month" matInput required>
+        <mat-option [value]="month" *ngFor="let month of months" (click)="listAll()">{{ month }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="float: right;">
+      <mat-label>Ano</mat-label>
+      <mat-select [(value)]="year" matInput required>
+        <mat-option [value]="year" *ngFor="let year of years" (click)="listAll()">{{ year }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-card>
+<br>
+
+
+<app-table-debit-transactions [dataSource]="debtors"></app-table-debit-transactions>
+<mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageNumber"
+                (page)="pageChangeEvent($event)">
+</mat-paginator>

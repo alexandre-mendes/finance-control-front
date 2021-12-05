@@ -6,14 +6,15 @@ import { MessageService } from '../../../service/message.service';
 import { DialogConfirmComponent } from 'src/app/shared/dialog-confirm/dialog-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RecordCreditor } from '../../../model/record-creditor.model';
+import {RecordCreditorService} from '../../../service/record-creditor.service';
 
 
 @Component({
-  selector: 'app-table-record-creditor',
-  templateUrl: './table-record-creditor.component.html',
-  styleUrls: ['./table-record-creditor.component.css']
+  selector: 'app-table-credit-transactions',
+  templateUrl: './table-credit-transactions.component.html',
+  styleUrls: ['./table-credit-transactions.component.css']
 })
-export class TableRecordCreditorComponent implements OnInit {
+export class TableCreditTransactionsComponent implements OnInit {
 
   @Input()
   dataSource: {}[] = [];
@@ -23,15 +24,15 @@ export class TableRecordCreditorComponent implements OnInit {
   wallet: Wallet = {};
 
   constructor(private walletService: WalletService,
-    private recordService: RecordService,
-    private messageService: MessageService,
-    private dialog: MatDialog) { }
+              private recordCreditorService: RecordCreditorService,
+              private messageService: MessageService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.wallet = this.walletService.wallet;
   }
 
-  cancel(record: RecordCreditor) {
+  cancel(record: RecordCreditor): void {
     const confirmDialog = this.dialog.open(DialogConfirmComponent, {
       data: {
         title: 'Confirmação',
@@ -39,10 +40,10 @@ export class TableRecordCreditorComponent implements OnInit {
       }
     });
     confirmDialog.afterClosed().subscribe(result => {
-      if (result === true && record.id != undefined) {
-        this.recordService.cancelCreditor(record.id).subscribe(res => {
-          this.messageService.showMessage("Cancelamento realizado com sucesso.")
-        })
+      if (result === true && record.id !== undefined) {
+        this.recordCreditorService.cancelCreditor(record.id).subscribe(res => {
+          this.messageService.showMessage('Cancelamento realizado com sucesso.');
+        });
       }
     });
   }

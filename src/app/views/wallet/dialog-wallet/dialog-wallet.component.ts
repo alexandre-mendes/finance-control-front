@@ -25,7 +25,7 @@ export class DialogWalletComponent implements OnInit {
 
   wallet: Wallet = {}
 
-  constructor(private walletService: WalletService, 
+  constructor(private walletService: WalletService,
     private messageService: MessageService,
     private dialogRef: MatDialogRef<DialogWalletComponent>) { }
 

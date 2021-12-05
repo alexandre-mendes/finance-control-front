@@ -1,5 +1,5 @@
-import { Tag } from "./tag.model";
-import { Wallet } from "./wallet.model";
+import { Tag } from './tag.model';
+import { Wallet } from './wallet.model';
 
 export interface RecordDebtor {
     id?: string;

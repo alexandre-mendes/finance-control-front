@@ -1,5 +1,7 @@
+import { HttpParams } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { PageEvent } from "@angular/material/paginator";
 import { Tag } from "src/app/model/tag.model";
 import { MessageService } from "src/app/service/message.service";
 import { TagService } from "src/app/service/tag.service";
@@ -10,6 +12,9 @@ import { DialogTagComponent } from "./dialog-tag/dialog-tag.component";
     selector: 'app-tag',
     templateUrl: './tag.component.html'})
 export class TagComponent implements OnInit {
+    length = 0;
+    pageSize = 10;
+    pageNumber = 0;
 
     tags: Tag[] = []
 
@@ -19,14 +24,19 @@ export class TagComponent implements OnInit {
     
     ngOnInit(): void {
         this.listAll();
-        this.tagService.listTags.subscribe(() => {
+        this.tagService.listTagsEvent.subscribe(() => {
             this.listAll();
         })
     }
 
     listAll() {
-        this.tagService.listAll().subscribe(tags => {
-            this.tags = tags.content;
+        let params = new HttpParams();
+        params = params.append('size', this.pageSize?.toString());
+        params = params.append('page', this.pageNumber?.toString());
+        this.tagService.listAll(params).subscribe(response => {
+            this.tags = response.content;
+            this.length = response.totalElements;
+            this.pageNumber = response.number;
         })
     }
 
@@ -53,6 +63,11 @@ export class TagComponent implements OnInit {
 
     openEditDialog(tag: Tag) {
         const dialogRef = this.dialog.open(DialogTagComponent);
-        this.tagService.updateTag.emit(tag);
+        this.tagService.editTagEvent.emit(tag);
+    }
+
+    pageChangeEvent(event: PageEvent) {
+        this.pageNumber = event.pageIndex;
+        this.listAll();
     }
 }

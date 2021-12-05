@@ -1,15 +1,15 @@
 <h2 mat-dialog-title>Realizar Transferência</h2>
-<mat-dialog-content class="mat-typography">    
+<mat-dialog-content class="mat-typography">
   <form  #form="ngForm">
     <mat-form-field appearance="fill">
         <mat-label>Carteira Destino</mat-label>
-        <mat-select [(value)]="walletDestiny" matInput required>
-          <mat-option [value]="option" *ngFor="let option of wallets">{{ option.title }}</mat-option>
+        <mat-select [(value)]="transfer.walletDestinyId" matInput required>
+          <mat-option [value]="option.id" *ngFor="let option of wallets">{{ option.title }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <input type='text' mask="separator.2" thousandSeparator="." matInput placeholder="Valor" [(ngModel)]="valueTransfer" name="value" required>
+      <input type='text' mask="separator.2" thousandSeparator="." matInput placeholder="Valor" [(ngModel)]="transfer.value" name="value" required>
     </mat-form-field>
 
 </form>

@@ -24,11 +24,11 @@ const TREE_DATA: Node[] = [
       children: [
         {
           name: 'Movimentações de Crédito',
-          route: 'debit-transactions'
+          route: 'credit-transactions'
         },
         {
           name: 'Movimentações de Débito',
-          route: 'credit-transactions'
+          route: 'debit-transactions'
         },
       ],
     },

@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Adicionar Registro</h2>
-<mat-dialog-content class="mat-typography">    
+<mat-dialog-content class="mat-typography">
   <form  #form="ngForm">
     <mat-form-field>
         <input matInput placeholder="Titulo" [(ngModel)]="record.title" name="title" required>
@@ -14,6 +14,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+      <mat-label>Carteira</mat-label>
+      <mat-select [(value)]="record.wallet" matInput required>
+        <mat-option [value]="wallet" *ngFor="let wallet of wallets" (click)="onSelectWallet(wallet)">{{ wallet.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Tag</mat-label>
         <mat-select [(value)]="record.tag" matInput required>
           <mat-option [value]="tag" *ngFor="let tag of tags">{{ tag.title }}</mat-option>
@@ -22,7 +29,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Vencimento</mat-label>
-        <input [disabled]="dayWallet != undefined" matInput [matDatepicker]="picker" [(ngModel)]="record.dateDeadline" name="dateDeadline">
+        <input [disabled]="record?.wallet?.dayWallet != undefined" matInput [matDatepicker]="picker" [(ngModel)]="record.dateDeadline" name="dateDeadline">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

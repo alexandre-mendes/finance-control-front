@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Pagamento Total</h2>
-<mat-dialog-content class="mat-typography">    
+<mat-dialog-content class="mat-typography">
   <form  #form="ngForm">
     <mat-form-field appearance="fill">
         <mat-label>Selecione uma Carteira</mat-label>
-        <mat-select [(value)]="walletCreditorId" matInput required>
+        <mat-select [(value)]="paymentAll.walletCreditorId" matInput required>
           <mat-option [value]="option.id" *ngFor="let option of wallets">{{ option.title }}</mat-option>
         </mat-select>
     </mat-form-field>

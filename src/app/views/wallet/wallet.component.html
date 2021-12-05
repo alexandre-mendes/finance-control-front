@@ -1,138 +1,37 @@
 <mat-card>
+  <h1>Carteiras</h1>
   <button color="primary" mat-raised-button (click)="openDialog()">
     <mat-icon>account_balance_wallet</mat-icon>
     Nova Carteira
   </button>
-
-  <div style="display: flex; float: right;">
-    <mat-icon>filter_alt</mat-icon>  
-    <mat-form-field appearance="fill" style="float: right;">
-      <mat-label>Mês</mat-label>
-      <mat-select [(value)]="monthSelected" matInput required>
-        <mat-option [value]="month" *ngFor="let month of months" (click)="reloadWallets()">{{ month.label }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" style="float: right;">
-      <mat-label>Ano</mat-label>
-      <mat-select [(value)]="yearSelected" matInput required>
-        <mat-option [value]="year" *ngFor="let year of years" (click)="reloadWallets()">{{ year }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 </mat-card>
 <br>
 
-
 <div class="container">
   <div class="row">
-    <div class="col">
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title style="color: #2e7d32; margin-top: 20px;">
-            <h1><b>Saldo Credor:</b> {{walletSummary.totalCreditor | currency : 'BRL'}}</h1>
-          </mat-panel-title>
-          <mat-panel-description style="margin-top: 20px;">
-            <mat-icon>mood</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p><b>Comprometido:</b> {{walletSummary.percentageCommitted | percent: '1.2-2'}}</p>
-      </mat-expansion-panel>   
-
-      <br>
-      <h2>Créditos</h2>
-      <div *ngFor="let wallet of walletsCreditor">
-        <mat-card class="example-card">
-          <!-- MENU -->
-          <button style="float: right;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>mode_edit</mat-icon>
-              <span>Editar</span>
-            </button>
-            <button mat-menu-item (click)="delete(wallet)">
-              <mat-icon>delete</mat-icon>
-              <span>Deletar</span>
-            </button>
-          </mat-menu>
-          <mat-card-header>
-            <div mat-card-avatar >
-              <button mat-mini-fab color="accent" (click)="redirectRecord(wallet)">
-                <mat-icon>trending_up</mat-icon>
-              </button>
-            </div>
-            <mat-card-title><a (click)="redirectRecord(wallet)" style="cursor:pointer;">{{wallet.title}}</a></mat-card-title>
-            <mat-card-subtitle>Crédito</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-          </mat-card-content>
-          <mat-card-actions>
-              <mat-card-subtitle>Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}}</mat-card-subtitle>
-          </mat-card-actions>
-        </mat-card>
-        <br>
+    <h3 class="col-5">Titulo</h3>
+    <h3 class="col-5">Tipo</h3>
+    <h3 class="col-2">Ações</h3>
+  </div>
+  <div class="row" *ngFor="let wallet of wallets">
+      <div class="col-5">
+          {{ wallet.title }}
       </div>
-    </div>
-
-    <div class="col">
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title style="color: #f44336; margin-top: 20px;">
-            <h1><b>Saldo Devedor:</b> {{(walletSummary.debitBalance == undefined ? 0 : walletSummary.debitBalance) | currency : 'BRL'}}</h1>
-          </mat-panel-title>
-          <mat-panel-description style="margin-top: 20px;">
-            <mat-icon>mood_bad</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p><b>Valor Total:</b> {{(walletSummary.totalDebtor == undefined ? 0 : walletSummary.totalDebtor) | currency : 'BRL'}} </p>
-        <p><b>Valor Pago:</b> {{(walletSummary.totalPaid == undefined ? 0 : walletSummary.totalPaid) | currency : 'BRL'}}</p>
-      </mat-expansion-panel> 
-
-      <br>
-      <h2>Débitos</h2>
-      <div *ngFor="let wallet of walletsDebtor">
-        <mat-card class="example-card">
-          <!-- MENU -->
-          <button style="float: right;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>mode_edit</mat-icon>
-              <span>Editar</span>
-            </button>
-            <button mat-menu-item (click)="delete(wallet)">
-              <mat-icon>delete</mat-icon>
-              <span>Deletar</span>
-            </button>
-          </mat-menu>
-          <mat-card-header>
-            <div mat-card-avatar>
-              <button mat-mini-fab color="warn" (click)="redirectRecord(wallet)">
-                <mat-icon>trending_down</mat-icon>
-              </button>
-            </div>
-            <mat-card-title><a (click)="redirectRecord(wallet)" style="cursor:pointer;">{{wallet.title}}</a></mat-card-title>
-            <mat-card-subtitle>Débito</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-          </mat-card-content>
-          <mat-card-actions>
-            <mat-card-subtitle>
-              Valor Total: {{(wallet.value == undefined ? 0  : wallet.value) | currency: 'BRL'}} |
-              Valor à Pagar: {{
-                ((wallet.value == undefined ? 0  : wallet.value) - (wallet.valuePaid == undefined ? 0  : wallet.valuePaid)) | currency: 'BRL'}}
-            </mat-card-subtitle>
-          </mat-card-actions>
-        </mat-card>
-        <br>
+      <div class="col-5">
+        {{ wallet.typeWallet === 'DEBTOR' ? 'Débito' : 'Crédito' }}
       </div>
-    </div>
+      <div class="col-2">
+          <button mat-button color="primary" (click)="openEditDialog(wallet)">
+              <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-button color="primary" (click)="delete(wallet)">
+              <mat-icon>delete</mat-icon>
+          </button>
+      </div>
   </div>
 </div>
+<mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageNumber"
+                (page)="pageChangeEvent($event)">
+</mat-paginator>

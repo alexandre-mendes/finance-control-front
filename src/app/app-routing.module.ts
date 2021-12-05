@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from './views/create-account/create-account.component';
 import { AuthGuard } from './shared/auth.guard';
 import { WalletComponent } from './views/wallet/wallet.component';
-import { RecordComponent } from './views/record/record.component';
 import { TagComponent } from './views/tag/tag.component';
 import { DebitTransactionsComponent } from './views/debit-transactions/debit-transactions.component';
 import { CreditTransactiosComponent } from './views/credit-transactions/credit-transactions.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
     component: GenericHomeComponent,
     children: [
       { path: 'wallet', component: WalletComponent },
-      { path: 'wallet/record', component: RecordComponent },
       { path: 'tag', component: TagComponent },
       { path: 'debit-transactions', component: DebitTransactionsComponent },
       { path: 'credit-transactions', component: CreditTransactiosComponent}

@@ -15,7 +15,7 @@ export class DialogTagComponent implements OnInit {
     constructor(private dialogRef: MatDialogRef<DialogTagComponent>,
         private tagService: TagService,
         private messageService: MessageService) {
-            this.tagService.updateTag.subscribe(tag => {
+            this.tagService.editTagEvent.subscribe(tag => {
                 this.tag = tag;
             });
         }
